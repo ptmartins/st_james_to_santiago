@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
@@ -29,60 +29,98 @@ const route = [
 ];
 
 export default function LeafletMap() {
-  useEffect(() => {
-    const map = L.map('map').setView([47, -3], 5);
+  const mapRef = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const mapInstanceRef = useRef(null);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(mapRef.current);
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  useEffect(() => {
+    if (mapInstanceRef.current || !hasAnimated) return;
+    const map = L.map('map');
+    mapInstanceRef.current = map;
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; CARTO',
+      subdomains: 'abcd',
+      minZoom: 4,
+      maxZoom: 19,
     }).addTo(map);
 
-    // Add markers
     route.forEach((point) => {
-        L.marker(point.coords).addTo(map).bindPopup(point.name);
+      L.marker(point.coords).addTo(map).bindPopup(point.name);
     });
 
-    // Separate UK and Spain routes
-    const ukWaypoints = route.slice(0, 3).map((p) => L.latLng(p.coords[0], p.coords[1]));
-    const spainWaypoints = route.slice(3).map((p) => L.latLng(p.coords[0], p.coords[1]));
+    const ukWaypoints = route.slice(0, 3).map((p) => L.latLng(p.coords));
+    const spainWaypoints = route.slice(3).map((p) => L.latLng(p.coords));
 
-    // UK route
     L.Routing.control({
-        waypoints: ukWaypoints,
-        routeWhileDragging: false,
-        show: false,
-        addWaypoints: false,
-        draggableWaypoints: false,
-        createMarker: () => null,
-        lineOptions: {
-        styles: [{ 
-          color: 'blue', 
-          weight: 4 }]
-        }
+      waypoints: ukWaypoints,
+      fitSelectedRoutes: false,
+      show: false,
+      addWaypoints: false,
+      draggableWaypoints: false,
+      createMarker: () => null,
+      lineOptions: {
+        styles: [{ color: 'blue', weight: 4 }],
+      },
     }).addTo(map);
 
-    // Spain route
     L.Routing.control({
-        waypoints: spainWaypoints,
-        routeWhileDragging: false,
-        show: false,
-        addWaypoints: false,
-        draggableWaypoints: false,
-        createMarker: () => null,
-        lineOptions: {
-        styles: [{ 
-          color: 'blue', 
-          weight: 4 }]
-        }
-    }).addTo(map);    
-  }, []);
+      waypoints: spainWaypoints,
+      fitSelectedRoutes: false,
+      show: false,
+      addWaypoints: false,
+      draggableWaypoints: false,
+      createMarker: () => null,
+      lineOptions: {
+        styles: [{ color: 'green', weight: 4 }],
+      },
+    }).addTo(map);
+
+    // Define bounds
+    const ukBounds = L.latLngBounds(ukWaypoints);
+    const spainBounds = L.latLngBounds(spainWaypoints);
+    const allBounds = L.latLngBounds(route.map(p => p.coords));
+
+    // Step 1: Fly to UK
+    map.fitBounds(ukBounds, { padding: [50, 50] });
+
+    // Step 2: After 3 seconds, fly to Spain
+    setTimeout(() => {
+      map.flyToBounds(spainBounds, { padding: [50, 50] });
+    }, 3000);
+
+    // Step 3: After 3 more seconds, fly to full route
+    setTimeout(() => {
+      map.flyToBounds(allBounds, { padding: [50, 50] });
+    }, 6000);
+  }, [hasAnimated]);
 
   return (
     <div
+      ref={mapRef} 
       id="map"
       style={{ 
+        borderRadius: '0',
         height: '65vh', 
-        width: '100%', 
-        borderRadius: '0' }}
+        width: '100%',  
+      }}
     />
   );
 }

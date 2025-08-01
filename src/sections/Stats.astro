@@ -10,30 +10,21 @@ import Stat from '../components/Stat.astro';
             <Stat title="Total altitude gain" icon="altitude" value="~13,300 m" />
             <Stat title="Highest point" icon="landscape" value="720 m" />
         </div>
-        <br>
-        <div>
-            Santander → Santillana del Mar	~33 km
-            Santillana del Mar → San Vicente de la Barquera	~37 km
-            San Vicente → Llanes	~50 km
-            Llanes → Ribadesella	~47 km
-            Ribadesella → Villaviciosa	~36 km
-            Villaviciosa → Avilés	~55 km
-            Avilés → Soto de Luiña	~50 km
-            Soto de Luiña → Luarca	~47 km
-            Luarca → Navia → Tapia de Casariego	~58 km
-            Tapia → Ribadeo → Mondoñedo	~67 km
-            Mondoñedo → Vilalba	~55 km
-            Vilalba → Baamonde → Sobrado dos Monxes	~60 km
-            Sobrado dos Monxes → Arzúa	~40 km
-            Arzúa → Santiago de Compostela	~40 km
-        </div>
     </div>
 </section>
 
 <style>
     .section--stats {
+        align-items: center;
         background-color: var(--blue);
-        color: var(--yellow);
+        color: var(--white);
+        display: flex;
+        height: 50vh;
+        min-height: unset;
+
+        .inner-container {
+            width: 100%;
+        }
     }
 
     .stats {
@@ -41,5 +32,5 @@ import Stat from '../components/Stat.astro';
         gap: 3rem;   
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         justify-items: center;
-    }
+    }   
 </style>
