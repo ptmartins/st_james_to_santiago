@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../images/logo.svg';
+import Navigation from './Navigation.astro';
+---
+
+<header class="header">
+    <div class="inner-container header__inner">
+        <div class="header__logo">
+            <a href="/">
+                <Image src={ logo } alt="Logo" height="60">
+            </a>
+        </div>
+        <div class="header__nav">
+            <Navigation />
+        </div>
+    </div>
+</header>
+
+<style>
+    .header {
+        padding-block: 3rem;
+    }
+
+    .header__inner {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>

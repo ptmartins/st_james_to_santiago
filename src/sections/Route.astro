@@ -1,0 +1,18 @@
+---
+import LeafletMap from "../components/LeafletMap.jsx";
+---
+
+<section class="section section--route">
+    <div class="inner-container">
+        <h2 class="section__title">Route</h2>
+        <div class="map">
+            <LeafletMap client:only="react" />
+        </div>
+    </div>
+</section>
+
+<style>
+    .section--route .inner-container {
+        max-width: none;
+    }
+</style>
