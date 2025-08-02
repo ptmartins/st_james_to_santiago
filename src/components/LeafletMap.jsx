@@ -89,7 +89,7 @@ export default function LeafletMap() {
       draggableWaypoints: false,
       createMarker: () => null,
       lineOptions: {
-        styles: [{ color: 'green', weight: 4 }],
+        styles: [{ color: 'blue', weight: 4 }],
       },
     }).addTo(map);
 
@@ -98,18 +98,28 @@ export default function LeafletMap() {
     const spainBounds = L.latLngBounds(spainWaypoints);
     const allBounds = L.latLngBounds(route.map(p => p.coords));
 
-    // Step 1: Fly to UK
+    // Anim 1: Fly to UK
     map.fitBounds(ukBounds, { padding: [50, 50] });
 
-    // Step 2: After 3 seconds, fly to Spain
+    // Anim 2: After 3 seconds, fly to Spain
     setTimeout(() => {
       map.flyToBounds(spainBounds, { padding: [50, 50] });
     }, 3000);
 
-    // Step 3: After 3 more seconds, fly to full route
+    // Anim 3: After 3 more seconds, fly to full route
     setTimeout(() => {
       map.flyToBounds(allBounds, { padding: [50, 50] });
     }, 6000);
+
+   // Re-zoom to catch Uk and SP routesm when clicking outside the map
+    const handleClick = (e) => {
+      const mapEl = mapRef.current;
+      if (mapEl && !mapEl.contains(e.target)) {
+        map.fitBounds(allBounds, { padding: [50, 50] });
+      }
+    };
+
+    document.addEventListener('click', handleClick);
   }, [hasAnimated]);
 
   return (
@@ -118,7 +128,7 @@ export default function LeafletMap() {
       id="map"
       style={{ 
         borderRadius: '0',
-        height: '65vh', 
+        height: '50vh', 
         width: '100%',  
       }}
     />

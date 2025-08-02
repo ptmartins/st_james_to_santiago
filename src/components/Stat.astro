@@ -11,10 +11,15 @@ const { title, icon, value } = Astro.props;
 </div>
 
 <style>
+
+    .stat__item {
+        justify-self: start;
+    }
     .stat__title {
         font-size: 1.3rem;
-        font-weight: 300;
+        font-weight: 400;
         margin-bottom: .75rem;
+        opacity: .8;
     }
 
     .stat__content {
@@ -28,7 +33,7 @@ const { title, icon, value } = Astro.props;
     }
 
     .stat__value {
-        font-size: 3rem;
+        font-size: 2.7rem;
         font-weight: 600;
     }
 </style>

@@ -7,6 +7,8 @@ import Stat from '../components/Stat.astro';
         <div class="stats">
             <Stat title="Total distance" icon="route" value="675 km" />
             <Stat title="Days" icon="timer" value="15 days" />
+            <Stat title="Stops" icon="distance" value="21" />
+            <Stat title="Energy spent" icon="heat" value="~38,000 kcal" />
             <Stat title="Total altitude gain" icon="altitude" value="~13,300 m" />
             <Stat title="Highest point" icon="landscape" value="720 m" />
         </div>
@@ -30,7 +32,11 @@ import Stat from '../components/Stat.astro';
     .stats {
         display: grid;
         gap: 3rem;   
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
         justify-items: center;
     }   
+
+    .stats > * {
+        justify-self: start;
+    }
 </style>
