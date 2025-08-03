@@ -1,13 +1,27 @@
+---
+const date = new Date();
+const year = date.getFullYear();
+---
+
+
 <footer class="footer">
     <div class="inner-container footer__inner">
-        <p>© 2021, Built with Astro</p>
+        <p>From St. James to Santiago. © {year}</p>
+        <p>Devloped by <a href="https://pedromartins.com.pt">Pedro Martins</a> and built with Astro.js</p>
     </div>
 </footer>
 
 <style>
     .footer {
         background: linear-gradient(180deg, rgb(62, 62, 62) 0%, rgb(0, 0, 0) 100%);
-        height: 30vh;
+        height: 20vh;
         padding-block: 3rem;
+
+        .inner-container{
+            border-block-start: 1px solid var(--white);
+            display: flex;
+            justify-content: space-between;
+            padding-block-start: 3rem;
+        }
     }
 </style>

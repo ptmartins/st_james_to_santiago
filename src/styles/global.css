@@ -6,6 +6,8 @@
     --white: #fff;
     --yellow: #FFD700;
 
+    --accent-color: var(--yellow);
+    --bg-color: #000;
     --font-color: var(--white);
     --inner-container-width: 1440px;
 }
@@ -21,24 +23,26 @@ html {
 }
 
 body {
+    background-color: var(--bg-color);
     color: var(--font-color);
     display: flex;
     flex-direction: column;
     font-family: "Geist", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 300;
     line-height: 1.5;
     min-height: 100vh;
 }
 
 a,
 .link {
-    color: var(--font-color);
+    color: var(--accent-color);
+    font-weight: 400;
     text-decoration: none;
 }
 
 p {
-    margin-block-end: 1.5rem;
+    margin-block-end: 2.1rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section {
-    margin-block: 6rem;
+    margin-block: 9rem;
     min-height: 100vh;
 }
 

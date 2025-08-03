@@ -19,8 +19,8 @@ import '../styles/global.css';
 
 	</head>
 	<body>
-		<audio id="piano-audio" src="/audio/piano-loop.mp3" autoplay loop></audio>
-		<button class="loop">switch</button>
+		<audio id="piano-audio" src="/audio/piano-loop.mp3" loop></audio>
+		<button class="loop material-symbols-outlined" title="Toggle background music">brand_awareness</button>
 		<Header />
 		<main class="main">
 			<slot />
@@ -31,24 +31,40 @@ import '../styles/global.css';
 
 <style>
 	.loop {
-		position: fixed;
-		top: 1rem;
-		right: 1rem;
-		z-index: 1000;
-		background-color: #fff;
+		align-items: center;
+		background-color: #464646;
 		border: none;
-		padding: 0.5rem 1rem;
+		border-radius: 50%;
+		color: var(--white);
 		cursor: pointer;
+		display: flex;
+		font-size: 2.1rem;
+		height: 48px;
+		justify-content: center;
+		padding: 0.5rem 1rem;
+		position: fixed;
+		right: 3rem;
+		top: 4.5rem;
+		width: 48px;
+		z-index: 1000;
 	}
 </style>
 
 <script>
-	document.querySelector('.loop').addEventListener('click', () => {
-		const audio = document.getElementById('piano-audio');
-		if (audio.paused) {
-			audio.play();
-		} else {
-			audio.pause();
-		}
-	});
+	const loop = document.querySelector('.loop');
+	
+	if(loop){
+		loop.addEventListener('click', () => {
+			const audio = document.getElementById('piano-audio');
+			if(audio) {
+				if (audio.paused) {
+					loop.textContent = 'no_sound';
+					audio.play();
+				} else {
+					loop.textContent = 'brand_awareness';
+					audio.pause();
+				}
+			}
+		});
+	}
 </script>
