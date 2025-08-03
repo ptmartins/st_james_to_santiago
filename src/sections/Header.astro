@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../images/logo.svg';
+import logo from '../images/logo.webp';
 import Navigation from './Navigation.astro';
 ---
 
@@ -19,16 +19,22 @@ import Navigation from './Navigation.astro';
 
 <style>
     .header {
-        padding-block: 3rem;
+        background-color: #464646;
+        border-radius: 50px;
+        inset-inline-start: 50%;
+        max-width: var(--inner-container-width);
+        padding-block: .75rem;
+        padding-inline: 3rem;;
+        position: fixed;
+        top: 3rem;
+        transform: translateX(-50%);
+        width: 100%;;
+        z-index: 10;
     }
 
     .header__inner {
         align-items: center;
         display: flex;
         justify-content: space-between;
-    }
-
-    .header__logo {
-        filter: invert(1);
     }
 </style>

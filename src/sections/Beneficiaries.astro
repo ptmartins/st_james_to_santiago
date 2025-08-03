@@ -1,5 +1,29 @@
+---
+import  crUK from '../images/logos/cr_uk_logo.png';
+import act from '../images/logos/act_logo.webp';
+import { Image } from 'astro:assets';
+---
+
 <section class="section section--beneficiaries">
     <div class="inner-container">
         <h2 class="section__title">Beneficiaries</h2>
+        <div class="beneficiaries">
+            <Image src={crUK} alt="Cancer Research UK" class="beneficiary__logo" />
+            <Image src={act} alt="Addenbrooke's Charitable Trust" class="beneficiary__logo" />
+        </div>
     </div>
 </section>
+
+<style>
+    .beneficiaries {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+
+        img {
+            object-size: cover;
+            width: 100%;
+            height: auto;
+        }
+    }
+</style>

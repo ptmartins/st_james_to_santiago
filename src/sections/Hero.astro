@@ -1,14 +1,14 @@
 ---
 import { Image } from 'astro:assets';
+import heroBg from '../images/hero.jpg';
 
 let count = 100;
 ---
 
 <section class="section section--hero">
+    <div class="hero-bg" style={`--hero-bg: url(${heroBg.src});`}></div>
     <div class="inner-container">
-        <!-- <h2 class="section__title">From St. James to Santiago</h2> -->
-        <p class="section__subTitle">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-
+        <h1 class="hero__title">From St. James to Santiago</h1>
         <!-- Countdown Timer -->
         <div class="tick" data-did-init="handleTickInit">
             <div
@@ -36,14 +36,32 @@ let count = 100;
 <style>
     .section--hero {
         margin-block: 0;
-        min-height: unset;
+        min-height: 100vh;
+
+        .inner-container {
+            inset-block-start: 50%;
+            inset-inline-start: 50%;
+            position: absolute;
+            translate: -50% -50%;
+            width: 100%;
+        }
     }
 
-    .hero__bg {
-        height: 70vh;
-        object-fit: cover;
-        object-position: bottom;
-        width: 100%;
+    .hero-bg {
+        background-image: var(--hero-bg);
+        background-size: cover;
+        background-position: bottom 3rem;
+        filter: brightness(0.5);
+        height: 100vh;
+        inset-block: 0 0;
+        inset-inline: 0 0;
+        position: absolute;
+    }
+
+    .hero__title {
+        font-size: 6.3rem;
+        letter-spacing: -0.3rem;
+        margin-block-end: 4.5rem;
     }
 
     .tick {
@@ -52,13 +70,14 @@ let count = 100;
         font-family:arial,sans-serif;
     }
 
-    .tick-flip,.tick-text-inline {
-        font-size: 2.5em;
+    .tick-flip,
+    .tick-text-inline {
+        font-size: 1em;
     }
 
     .tick-label {
-        margin-top:1em;
-        font-size:1em;
+        margin-block-start: 1.5em;
+        font-size: 2.3rem;
     }
 
     .tick-char {
@@ -85,7 +104,7 @@ let count = 100;
     }
 
     .tick-label {
-        color: rgb(90, 93, 99) !important; 
+        color: rgb(255, 255, 255) !important; 
     }
 
     .tick-flip-panel {

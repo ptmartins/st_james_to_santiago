@@ -20,6 +20,7 @@ import '../styles/global.css';
 	</head>
 	<body>
 		<audio id="piano-audio" src="/audio/piano-loop.mp3" autoplay loop></audio>
+		<button class="loop">switch</button>
 		<Header />
 		<main class="main">
 			<slot />
@@ -27,3 +28,27 @@ import '../styles/global.css';
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.loop {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		z-index: 1000;
+		background-color: #fff;
+		border: none;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+	}
+</style>
+
+<script>
+	document.querySelector('.loop').addEventListener('click', () => {
+		const audio = document.getElementById('piano-audio');
+		if (audio.paused) {
+			audio.play();
+		} else {
+			audio.pause();
+		}
+	});
+</script>
