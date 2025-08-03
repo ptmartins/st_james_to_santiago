@@ -47,8 +47,8 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
     font-style: normal;
-    font-weight: 700;
-    letter-spacing: -3.2px;
+    font-weight: 600;
+    letter-spacing: -1px;
     text-transform: uppercase;
 }
 
@@ -62,14 +62,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section {
-    margin-block: 9rem;
-    min-height: 100vh;
+    margin-block: 12rem;
 }
 
 .section__title {
     font-size: 4.8rem;
     font-weight: 900;
-    margin-block-end: 4.5rem;;
+    margin-block-end: 6rem;;
 }
 
 .section__subTitle {

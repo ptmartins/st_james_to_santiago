@@ -6,7 +6,6 @@ import Intro from '../sections/Intro.astro';
 import Ticker from '../sections/Ticker.astro';
 import Stats from '../sections/Stats.astro'; 
 import Route from '../sections/Route.astro';
-import overlay from '../images/fuzz.avif';
 ---
 
 <Layout>
@@ -16,22 +15,4 @@ import overlay from '../images/fuzz.avif';
 	<Stats />
 	<Beneficiaries />
 	<Route />
-	<div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
 </Layout>
-
-<style>
-	.overlay {
-		background-image: var(--overlay);
-		background-position: top left;
-		background-repeat: repeat;
-		background-size: 200px auto;
-		filter: brightness(0.5);
-		height: 100%;
-		inset-inline-start: 0;
-		pointer-events: none;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 9999;
-	}
-</style>

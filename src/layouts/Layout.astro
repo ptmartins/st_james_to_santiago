@@ -1,7 +1,7 @@
 ---
 import Header from '../sections/Header.astro';
 import Footer from '../sections/Footer.astro';
-
+import overlay from '../images/fuzz.avif';
 import '../styles/global.css';
 ---
 
@@ -26,6 +26,7 @@ import '../styles/global.css';
 			<slot />
 		</main>
 		<Footer />
+		<div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
 	</body>
 </html>
 
@@ -47,6 +48,20 @@ import '../styles/global.css';
 		top: 4.5rem;
 		width: 48px;
 		z-index: 1000;
+	}
+	.overlay {
+		background-image: var(--overlay);
+		background-position: top left;
+		background-repeat: repeat;
+		background-size: 200px auto;
+		filter: brightness(0.5);
+		height: 100%;
+		inset-inline-start: 0;
+		pointer-events: none;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 9999;
 	}
 </style>
 

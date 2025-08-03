@@ -127,7 +127,6 @@ export default function LeafletMap() {
       ref={mapRef} 
       id="map"
       style={{ 
-        borderRadius: '0',
         height: '50vh', 
         width: '100%',  
       }}
