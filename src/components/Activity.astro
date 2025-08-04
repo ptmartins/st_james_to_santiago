@@ -5,6 +5,8 @@ const date = new Date(data.start_date).toLocaleDateString('en-US', {
     day: 'numeric',
     year: 'numeric'
 });
+
+const duration = new Date(data.elapsed_time * 1000).toISOString().substr(11, 8);
 ---
 
 <div class="activity">
@@ -13,6 +15,10 @@ const date = new Date(data.start_date).toLocaleDateString('en-US', {
         { data.sport_type === 'Ride' ? <span class="activity__sport-type material-symbols-outlined" title="Cycle">directions_bike</span> : <span class="activity__sport-type material-symbols-outlined" title="Run">sprint</span> }
     </div>
     <div class="activity__content">
+        <div class="activity__data activity--duration">
+            <span class="activity__label material-symbols-outlined" title="Duration">access_time</span>
+            <span>{ duration } </span>    
+        </div>
         <div class="activity__data activity__distance"> 
             <span class="activity__label material-symbols-outlined" title="Distance">route</span>
             <span>{ Number(data.distance / 1000).toFixed(3) } Km</span>    
