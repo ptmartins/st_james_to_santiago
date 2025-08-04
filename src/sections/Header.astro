@@ -7,19 +7,20 @@ import Navigation from './Navigation.astro';
 <header class="header">
     <div class="inner-container header__inner">
         <div class="header__logo">
-            <a href="/">
+            <a href="/" title="Home">
                 <Image src={ logo } alt="Logo" height="60">
             </a>
         </div>
         <div class="header__nav">
             <Navigation />
+            <button class="btn btn--cta">Contribute</button>
         </div>
     </div>
 </header>
 
 <style>
     .header {
-        background-color: rgba(70, 70, 70, .8);
+        background-color: rgba(70, 70, 70, .96);
         border-radius: 50px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, .88);
         inset-inline-start: 50%;
@@ -37,5 +38,14 @@ import Navigation from './Navigation.astro';
         align-items: center;
         display: flex;
         justify-content: space-between;
+    }
+
+    .header__nav {
+        align-items: center;
+        display: flex;
+
+        .btn--cta {
+            margin-inline-start: 2rem;
+        }
     }
 </style>

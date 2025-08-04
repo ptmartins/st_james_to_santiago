@@ -1,0 +1,18 @@
+---
+import Activity from '../components/Activity.astro';
+const { activities } = Astro.props;
+---
+
+<ul class="activities">
+  { activities.map(activity => (
+    <Activity data={ activity } key={ activity.id } />
+  ))}
+</ul>
+
+<style>
+    .activities {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 3rem;
+    }
+</style>
