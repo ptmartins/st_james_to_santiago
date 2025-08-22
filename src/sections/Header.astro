@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../images/logo.webp';
-import Navigation from './Navigation.astro';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <header class="header">
@@ -21,7 +21,7 @@ import Navigation from './Navigation.astro';
 <style>
     .header {
         background-color: rgba(70, 70, 70, .96);
-        border-radius: 50px;
+        border-radius: 22px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, .88);
         inset-inline-start: 50%;
         max-width: var(--inner-container-width);
@@ -38,6 +38,12 @@ import Navigation from './Navigation.astro';
         align-items: center;
         display: flex;
         justify-content: space-between;
+    }
+
+    .header__logo,
+    .header__logo a {
+        align-items: center;
+        display: flex;
     }
 
     .header__nav {

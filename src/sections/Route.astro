@@ -1,11 +1,53 @@
 ---
+import Arrow from '../components/Arrow.astro';
 import LeafletMap from "../components/LeafletMap.jsx";
 ---
 
 <section class="section section--route">
     <div class="inner-container">
         <h2 class="section__title">Route</h2>
-        <div class="route">
+        <div class="routes">
+            <div class="route route__uk">
+                <span class="locale">London (St. James Park)</span>
+                <Arrow />
+                <span class="locale">Haslemere</span>
+                <Arrow />
+                <span class="locale">Portsmouth</span>
+            </div>
+            <div class="route route--ferry">
+                <span class="material-symbols-outlined ferry">directions_boat</span>
+            </div>
+            <div class="route route--spain">
+                <span class="locale">Santander</span>
+                <Arrow />
+                <span class="locale">Santilla del Mar</span>
+                <Arrow />
+                <span class="locale">San Vicente de la Barquera</span>
+                <Arrow />                
+                <span class="locale">Llanes</span>
+                <Arrow />                
+                <span class="locale">Ribadesella</span>
+                <Arrow />  
+                <span class="locale">Villaviciosa</span>
+                <Arrow />  
+                <span class="locale">Avilés</span>
+                <Arrow />  
+                <span class="locale">Cudillero</span>
+                <Arrow />  
+                <span class="locale">Luarca</span>
+                <Arrow />  
+                <span class="locale">Mondoñedo</span>
+                <Arrow />  
+                <span class="locale">Vilalba</span>
+                <Arrow />  
+                <span class="locale">Sobrado dos Monxes</span>
+                <Arrow />  
+                <span class="locale">Arzúa</span>
+                <Arrow />
+                <span class="locale">Santiago de Compostela</span>
+            </div>
+        </div>
+        <div class="route__map">
             <LeafletMap client:only="react" />
         </div>
     </div>
@@ -16,5 +58,28 @@ import LeafletMap from "../components/LeafletMap.jsx";
         background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);
         margin-block-end: 0;
         padding-block-end: 12rem;
+    }
+
+    .routes {
+        margin-block-end: 9rem;
+    }
+
+    .route {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .route--ferry {
+        margin-block: 3rem;
+    }
+
+    .ferry {
+        font-size: 3.4rem;
+    }
+
+    .locale {
+        font-size: 2.1rem;
+        font-weight: 300;
     }
 </style>

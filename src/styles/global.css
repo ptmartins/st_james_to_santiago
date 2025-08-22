@@ -1,101 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 
 :root {
-    --black: #000;
-    --white: #fff;
-    --yellow: #FFD700;
+  --black: #000;
+  --white: #fff;
+  --yellow: #ffd700;
 
-    --accent: var(--yellow);
-    --accent-pale-yellow: #F4F9C2;
-    --accent-purple: #9191FB;
-    --accent-green: #62D598;
-    --bg-color: #000;
-    --font-color: var(--white);
-    --inner-container-width: 1440px;
-    --border-radius: 8px;
+  --accent: var(--yellow);
+  --accent-pale-yellow: #f4f9c2;
+  --accent-purple: #9191fb;
+  --accent-green: #62d598;
+  --bg-color: #000;
+  --font-color: var(--white);
+  --inner-container-width: 1440px;
+  --border-radius: 8px;
+
+  --glass: rgba(0, 0, 0, 0.4);
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: column;
-    font-family: "Geist", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1.5;
-    min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  font-family: "Geist", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  min-height: 100vh;
 }
 
 a,
 .link {
-    color: var(--accent);
-    font-weight: 400;
-    text-decoration: none;
+  color: var(--accent);
+  font-weight: 400;
+  text-decoration: none;
 }
 
 p {
-    margin-block-end: 2.1rem;
+  margin-block-end: 2.1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: -1px;
-    text-transform: uppercase;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-transform: uppercase;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
-button, 
+button,
 .btn {
-    border: 0;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    padding: .75rem 1rem;
-    font-size: 1.2rem;
+  border: 0;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-size: 1.2rem;
 }
 
 .btn--cta {
-    background-color: var(--accent);
-    color: var(--black);
-    font-weight: 600;
+  background-color: var(--accent);
+  color: var(--black);
+  font-weight: 600;
 }
 
 .inner-container {
-    margin: 0 auto;
-    max-width: var(--inner-container-width);
+  margin: 0 auto;
+  max-width: var(--inner-container-width);
 }
 
 .main {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .section {
-    margin-block: 12rem;
+  margin-block: 12rem;
 }
 
 .section__title {
-    font-size: 4.8rem;
-    font-weight: 900;
-    margin-block-end: 9rem;
+  font-size: 4.8rem;
+  font-weight: 900;
+  margin-block-end: 9rem;
 }
 
 .section__subTitle {
-    font-size: 1.8rem;
-    font-style: italic;
-    font-weight: 300;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: 300;
 }
