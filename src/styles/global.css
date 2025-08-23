@@ -46,6 +46,13 @@ a,
   color: var(--accent);
   font-weight: 400;
   text-decoration: none;
+  text-decoration-style: none;
+  transition: var(--default-transition);
+
+  &:hover {
+    text-decoration: underline;  
+    text-decoration-style: dotted;
+  }
 }
 
 p {
