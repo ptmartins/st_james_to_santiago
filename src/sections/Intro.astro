@@ -7,10 +7,30 @@
         <p>Hey,</p>
         <p>I'm Pedro, a 50-year-old who decided it was time for shedding those extra pounds I've been carrying for the last 10-15 years, embracing fitness, and proving that it’s never too late to change bad habits. My journey isn’t just about personal transformation. It’s also about making some difference during that process.</p>
         <p>This next year, I'm embarking on an inspiring cycling adventure — pushing past comfort zones, scaling new heights, and riding hundreds of miles. The goal? To raise vital funds for <a href="https://www.cancerresearchuk.org/" target="_blank">Cancer Research UK</a> and <a href="https://act4addenbrookes.org.uk/" target="_blank">Addenbrooke's Charitable Trust</a>.</p>
-        <p>Armed with nothing but determination, my sturdy 20 y.o. <a href="https://www.specialized.com/us/en/05-fsr-xc-comp/p/439?color=14388-439&searchText=9352-3255" target="_blank">Specialized FSR XC Comp</a>  bike, and a heart full of purpose, I'm inviting friends, family, and community to join in. Every mile pedaled represents not just physical strides but muche needed funding for those organisations.</p>
+        <p>Armed with nothing but determination, my sturdy 20 y.o. <a href="https://www.specialized.com/us/en/05-fsr-xc-comp/p/439?color=14388-439&searchText=9352-3255" target="_blank">Specialized FSR XC Comp</a>  bike, and a heart full of purpose, I'm inviting friends, family, and community to join in. Every mile pedaled represents not just physical strides but much needed funding for those organisations.</p>
         <p>Follow my journey, cheer on the effort, and discover how one person’s decision to challenge themselves can ripple out to uplift others, inspire change, and fuel hope where it’s needed most.</p>
         <p>Ready to join the ride? Let’s make every turn of the wheel count.</p>
         <p>The clock is ticking!</p>
+    
+        <div class="tick" data-did-init="handleTickInit">
+            <div
+                data-repeat="true"
+                data-layout="horizontal center fit"
+                data-transform="preset(d, h, m, s) -> delay"
+            >
+                <div class="tick-group">
+                    <div
+                        data-key="value"
+                        data-repeat="true"
+                        data-transform="pad(00) -> split -> delay"
+                    >
+                        <span data-view="flip"></span>
+                    </div>
+
+                    <span data-key="label" data-view="text" class="tick-label"></span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -18,4 +38,107 @@
     .section--intro {
         min-height: unset;
     }
+
+     .tick {
+        font-family:arial,sans-serif;
+        font-size:1rem; 
+        margin-block-start: 9rem;
+        white-space:nowrap; 
+    }
+
+    .tick-flip,
+    .tick-text-inline {
+        font-size: 1em;
+    }
+
+    .tick-label {
+        margin-block-start: 1.5em;
+        font-size: 2.3rem;
+    }
+
+    .tick-char {
+        width:1.5em;
+    }
+
+    .tick-text-inline {
+        display:inline-block;
+        text-align:center;
+        min-width:1em;
+    }
+
+    .tick-text-inline+.tick-text-inline {
+        margin-left:-.325em;
+    }
+
+    .tick-group {
+        margin:0 .5em;
+        text-align:center;
+    }
+
+    .tick-text-inline {
+        color: rgb(90, 93, 99) !important; 
+    }
+
+    .tick-label {
+        color: rgb(255, 255, 255) !important; 
+    }
+
+    .tick-flip-panel {
+        color: rgb(255, 255, 255) !important; 
+    }
+
+    .tick-flip {
+        font-family: !important; 
+    }
+
+    .tick-flip-panel-text-wrapper {
+        line-height: 1.45 !important; 
+    }
+
+    .tick-flip-panel {
+        background-color: rgb(59, 61, 59) !important; 
+    }
+
+    .tick-flip {
+        border-radius:0.12em !important; 
+    }
 </style>
+
+<script is:inline>
+    function handleTickInit(tick) {
+
+        // get timer offset (if not found, set to today)
+        var offset = new Date( localStorage.getItem('countdown-offset') || new Date() );
+
+        // store the offset (not really necessary but saves some if statements)
+        localStorage.setItem('countdown-offset', offset);
+
+        // time in hours the timer will run down
+        var timeDuration = Tick.helper.duration(1, 'days');
+
+        // add 24 hours to get final deadline
+        var deadline = new Date('2026-10-06T00:00:00Z');
+
+        // create counter
+        var counter = Tick.count.down(deadline, { format: ['d', 'h' ,'m', 's'] } );
+
+        // update tick with the counter value
+        counter.onupdate = function(value) {
+            tick.value = value;
+        };
+
+        counter.onended = function() {
+            // redirect, uncomment the next line
+            // window.location = 'my-location.html'
+
+            // hide counter, uncomment the next line
+            // tick.root.style.display = 'none';
+
+            // show message, uncomment the next line
+            // document.querySelector('.tick-onended-message').style.display = '';
+        };
+    }
+</script>
+
+
+<script is:inline src="/js/flip.min.js"></script>

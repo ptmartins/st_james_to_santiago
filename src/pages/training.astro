@@ -1,16 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ActivityList from '../components/ActivityList.astro';
-import Dashboard from '../components/Dashboard.astro';
+import DashboardItem from '../components/DashboardItem.astro';
 
 let activities = [];
+let totalSessions = 0;
+let totalDistance = 0;
+let totalDuration = 0;
+let totalDurationFormatted;
+let speed = 0;
+let avgSpeed = 0;
+
 try {
   const res = await fetch('http://localhost:4321/api/strava');
   activities = await res.json();
   console.log(activities);
+
+
+  activities.forEach(activity => {
+    totalSessions++;
+    totalDistance = totalDistance + (activity.distance / 1000);
+    totalDuration = totalDuration + activity.elapsed_time;
+    totalDurationFormatted = new Date(totalDuration* 1000).toISOString().substr(11, 8);
+    speed = speed + activity.average_speed;
+  });
+
 } catch (e) {
   activities = [];
 }
+
+  avgSpeed = speed / totalSessions;
 ---
 
 <Layout title="Training">
@@ -20,7 +39,10 @@ try {
 
                 <!-- Dashboard -->
                 <div class="training__dashboard">
-                    <Dashboard />
+                  <DashboardItem type="sessions" data={ totalSessions } />
+                  <DashboardItem type="distance" data={ totalDistance } />
+                  <DashboardItem type="duration" data={ totalDurationFormatted } />
+                  <DashboardItem type="speed" data={ avgSpeed } />
                 </div>
 
                 <!-- Sessions -->
@@ -49,6 +71,13 @@ try {
   }
 
   .training__dashboard {
-    margin-block-end: rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-block-end: 9rem;
+  }
+
+  .training__dashboard > * {
+    flex: 1 0 25%;
   }
 </style>

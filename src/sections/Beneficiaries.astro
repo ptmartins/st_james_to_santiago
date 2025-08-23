@@ -8,8 +8,12 @@ import { Image } from 'astro:assets';
     <div class="inner-container">
         <h2 class="section__title">Beneficiaries</h2>
         <div class="beneficiaries">
-            <Image src={crUK} alt="Cancer Research UK" class="beneficiary__logo" />
-            <Image src={act} alt="Addenbrooke's Charitable Trust" class="beneficiary__logo" />
+            <a href="https://www.cancerresearchuk.org/" target="_blank" rel="noopener">
+                <Image src={crUK} alt="Cancer Research UK" class="beneficiary__logo" />
+            </a>
+            <a href="https://act4addenbrookes.org.uk/" target="_blank" rel="noopener">
+                <Image src={act} alt="Addenbrooke's Charitable Trust" class="beneficiary__logo" />
+            </a>
         </div>
     </div>
 </section>
@@ -20,9 +24,15 @@ import { Image } from 'astro:assets';
         grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
         gap: 6rem;
         img {
+            filter: grayscale(100%) brightness(100);
             height: auto;
             object-size: cover;
-            width: 100%; 
+            transition: var(--default-transition);
+            width: 100%;
+
+            &:hover {
+                filter: none;
+            }
         }
     }
 </style>

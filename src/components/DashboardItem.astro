@@ -1,0 +1,82 @@
+---
+const { type, data } = Astro.props;
+let label;
+let subLabel;
+let unit;
+let icon;
+
+switch(type.toLowerCase()) {
+    case 'sessions':
+        label = 'Total Sessions';
+        subLabel = 'All time';
+        icon = 'calendar_month'
+        break;
+    case 'distance':
+        label = 'Total Distance';
+        subLabel = `Km's cycled`;
+        unit = 'Km';
+        icon = 'location_on';
+        break;
+    case 'duration':
+        label = 'Total Duration';
+        subLabel = 'Time training';
+        icon = 'schedule';
+        break;
+    case 'speed':
+        label = 'Average Speed';
+        subLabel = 'Overall average';
+        unit= 'Km/h';
+        icon = 'speed';
+        break;
+}
+---
+
+<div class="dashboardItem">
+    <div class="content">
+        <h3 class="label"> { label } </h3>
+        <h2 class="data"> { data } <span class="unit"> { unit } </span> </h2>
+        <p class="subLabel"> { subLabel } </p>
+    </div>
+    <div class="icon material-symbols-outlined"> { icon } </div>
+
+</div>
+
+<style>
+    .dashboardItem {
+        background-color: var(--glass);
+        border: 1px solid #222;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .95);
+        color: var(--white);
+        display: flex;
+        font-size: 16px;
+        font-weight: 400;
+        justify-content: space-between;
+        padding: 1.5rem;
+    }
+
+    .label,
+    .subLabel {
+        letter-spacing: -0.5px;
+        margin-block: 0;
+    }
+
+    .subLabel {
+        opacity: .5;
+    }
+
+    .data {
+        font-size: 3rem;
+        margin-block: .75rem;
+    }
+
+    .unit {
+        font-size: 16px;
+        margin-inline-start: .75rem;
+        text-transform: initial;
+    }
+
+    .icon {
+        font-size: 3rem;
+    }
+</style>
