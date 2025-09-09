@@ -17,11 +17,15 @@ const year = date.getFullYear();
     .footer {
         background: linear-gradient(180deg, rgb(62, 62, 62) 0%, rgb(0, 0, 0) 100%);
         font-size: 1.1rem;
-        padding-block-end: 4.5rem;
+        padding-inline: 1.5rem;
+        padding-block-end: 1.5rem;
 
-        .inner-container{
+        .inner-container {
+            align-items: center;
             border-block-start: 1px solid var(--white);
             display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             justify-content: space-between;
             padding-block-start: 3rem;
         }
@@ -41,5 +45,22 @@ const year = date.getFullYear();
         height: 30px;
         object-fit: cover;
         width: 30px;;
+    }
+
+
+    @media all and (min-width: 992px) {
+        .footer {
+            padding-block-end: 4.5rem;
+            .inner-container {
+                flex-direction: row;
+                gap: unset;
+            }
+        }
+    }
+
+    @media all and (min-width: 1440px) {
+        .footer {
+            padding-inline: 0;
+        }
     }
 </style>

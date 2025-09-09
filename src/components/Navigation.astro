@@ -5,18 +5,26 @@ const { pathname } = Astro.url;
 <nav class="nav">
     <a href="/" class={ pathname === '/' ? 'nav__link nav__link--active' : 'nav__link'}>Home</a>
     <a href="/training" class={pathname === '/training' ? 'nav__link nav__link--active' : 'nav__link'}>Training</a>
-    <a href="/training" class={pathname === '/progress' ? 'nav__link nav__link--active' : 'nav__link'}>Progress</a>
     <a href="/blog" class={pathname === '/blog' ? 'nav__link nav__link--active' : 'nav__link'}>Blog</a>
 </nav>
+<div class="nav__mobile">
+    <button class="nav__toggle material-symbols-outlined" aria-label="Toggle navigation">menu</button>
+    <ul class="nav__menu">
+        <li><a href="/" class={ pathname === '/' ? 'nav__link nav__link--active' : 'nav__link'}>Home</a></li>
+        <li><a href="/training" class={pathname === '/training' ? 'nav__link nav__link--active' : 'nav__link'}>Training</a></li>
+        <li><a href="/blog" class={pathname === '/blog' ? 'nav__link nav__link--active' : 'nav__link'}>Blog</a></li>
+</div>
 
 
 
 <style>
+    
     .nav__link {
         color: var(--white);
         font-size: 1.3rem;
         margin-inline-start: 1.5rem;
         position: relative;
+        text-decoration: none;
         transition: var(--default-transition);
 
         &:first-child {
@@ -25,6 +33,7 @@ const { pathname } = Astro.url;
 
         &:hover {
             color: var(--accent);
+            text-decoration: none;
         }
 
         &::after {
@@ -46,4 +55,34 @@ const { pathname } = Astro.url;
             opacity: 1;
         }
     }
+
+    .nav__toggle {
+        display: grid§;
+        height: 48px;
+        padding: 0;
+        place-items: center;
+        width: 48px;
+    }
+
+    .is-mobile .nav {
+            display: none;
+    }
+
+    :global(.nav__mobile) {
+        display: none; 
+
+        .nav__menu {
+            display: none;
+        }
+    }  
+    :global(.is-mobile) {
+        .nav {
+            display: none;
+        }
+
+        .nav__mobile {
+            display: block;
+        }
+    }
+
 </style>

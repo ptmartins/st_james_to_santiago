@@ -48,6 +48,8 @@ import '../styles/global.css';
 		top: 4.5rem;
 		width: 48px;
 		z-index: 1000;
+
+		display: none;
 	}
 	.overlay {
 		background-image: var(--overlay);
@@ -82,4 +84,16 @@ import '../styles/global.css';
 			}
 		});
 	}
+
+	// Apply mobile class if device is mobile or screen is small - need to work on resize too
+	function checkMobile() {
+		if (window.innerWidth < 992) {
+			document.body.classList.add('is-mobile');
+		} else {
+			document.body.classList.remove('is-mobile');
+		}
+	}
+
+	window.addEventListener('resize', checkMobile);
+	checkMobile();
 </script>

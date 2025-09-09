@@ -1,0 +1,105 @@
+---
+const { data } = Astro.props;
+---
+
+<div class="stop">
+    <div class="stop__label"> {data.label} </div>
+    <div class="stop__content">
+
+        {
+            data.name !== 'Ferry' ?
+                <h3> {data.name} </h3>
+                <p>Distance cycled: {data.distance} km </p> :
+                <span class="material-symbols-outlined ferry"> directions_boat </span>
+        }
+
+
+    </div>
+</div>
+
+<style>
+    .stop {
+        display: flex;
+        gap: 2rem;
+        position: relative;
+
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+
+        &::before {
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            content: '';
+            height: 14px;
+            inset-block-start: 10px;
+            inset-inline-start: calc(100px - 7px);
+            position: absolute;
+            width: 14px;
+        }
+
+        &::after {
+            background-color: var(--white);
+            content: '';
+            height: calc(100% - 18px);
+            inset-block-start: 28px;
+            inset-inline-start: calc(100px + 1.5px);
+            position: absolute;
+            width: 3px;
+        }
+
+        &:last-of-type {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    .stop--visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    .stop__label {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-block-start: .375rem;
+        width: 100px;
+    }
+
+    .stop__content {
+
+        h3 {
+            font-size: 1.8rem;
+            margin-block-end: .75rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            opacity: .65;
+        }
+    }
+
+    .ferry {
+        font-size: 3.4rem;
+        margin-block-end: 3rem;
+    }
+
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const stopEl = document.querySelectorAll('.stop');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('stop--visible');
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+        stopEl.forEach(el => observer.observe(el));
+    });
+</script>

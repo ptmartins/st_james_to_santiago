@@ -20,9 +20,8 @@ import Navigation from '../components/Navigation.astro';
 
 <style>
     .header {
-        background-color: rgba(70, 70, 70, .96);
+        background-color: var(--black);
         border-radius: 22px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, .88);
         inset-inline-start: 50%;
         max-width: var(--inner-container-width);
         padding-block: .75rem;
@@ -30,8 +29,8 @@ import Navigation from '../components/Navigation.astro';
         position: fixed;
         top: 3rem;
         transform: translateX(-50%);
-        width: 100%;;
-        z-index: 10;
+        width: calc(100% - 3rem);
+        z-index: 9999;
     }
 
     .header__inner {
@@ -49,9 +48,25 @@ import Navigation from '../components/Navigation.astro';
     .header__nav {
         align-items: center;
         display: flex;
+    }
 
+    :global(.is-mobile) {
         .btn--cta {
-            margin-inline-start: 2rem;
+            order: -1;
+            margin-inline-end: 2.5rem;
+        }
+    }
+
+    :global(:not(.is-mobile)) {
+        .btn--cta {
+            margin-inline-end: .75rem;
+            margin-inline-start: 2.5rem;
+        }
+    }
+
+    @meida all and (min-width: 1440px) {
+        header {
+            width: 100%;
         }
     }
 </style>

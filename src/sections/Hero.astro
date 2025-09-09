@@ -1,5 +1,5 @@
 ---
-import heroBg from '../images/hero.jpg';
+import heroBg from '../images/hero.webp';
 ---
 
 <section class="section section--hero">
@@ -37,7 +37,7 @@ import heroBg from '../images/hero.jpg';
     }
 
     .hero__title {
-        font-size: 4.5rem;
+        font-size: 3.2rem;
         letter-spacing: -2px;
         margin-block-end: 6rem;
         margin-inline: auto;
@@ -55,11 +55,25 @@ import heroBg from '../images/hero.jpg';
     }
 
     .hero__overlay {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgb(0, 0, 0) 99%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgb(0, 0, 0) 99%);
         flex: none;
         inset: 0;
         overflow: hidden;
         position: absolute;
+    }
+
+    @media all and (min-width: 768px) {
+
+    }
+
+    @media all and (min-width: 992px) {
+        .hero__title {
+            font-size: 4.8rem;
+        }
+    }
+
+    @media all and (min-width: 1440px) {
+    
     }
     
 </style>
