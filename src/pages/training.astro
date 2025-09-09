@@ -25,7 +25,8 @@ try {
     speed = speed + activity.average_speed;
   });
 
-} catch (e) {
+} catch (err) {
+  console.log('Strava fetch error:', err);
   activities = [];
 }
 
