@@ -15,7 +15,7 @@ export async function GET({ request }) {
     if (!cachedAccessToken || Date.now() / 1000 > cachedExpiresAt) {
       const tokenRes = await fetch('https://www.strava.com/oauth/token', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json charset=UTF-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           client_id: STRAVA_CLIENT_ID,
           client_secret: STRAVA_CLIENT_SECRET,
