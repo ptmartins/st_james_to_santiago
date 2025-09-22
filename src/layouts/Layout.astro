@@ -16,10 +16,10 @@ import '../styles/global.css';
 
 
 		<!-- Preload Google Fonts stylesheet for faster font rendering -->
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" media="print" onload="this.media='all'" />
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" media="print" onload="this.media='all'" />
 		<noscript>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
 		</noscript>
 
 		<!-- Defer non-critical CSS -->
@@ -80,12 +80,12 @@ import '../styles/global.css';
 </style>
 
 <script>
+
 	const loop = document.querySelector('.loop');
-	
 	if(loop){
 		loop.addEventListener('click', () => {
 			const audio = document.getElementById('piano-audio');
-			if(audio) {
+			if(audio && audio instanceof HTMLAudioElement) {
 				if (audio.paused) {
 					loop.textContent = 'no_sound';
 					audio.play();
