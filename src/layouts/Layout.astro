@@ -14,7 +14,10 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>From St. James to Santiago</title>
 
-		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+		<link rel="preload" as="style" href="./css/flip.min.css" />
         <link rel="stylesheet" href="./css/flip.min.css" />
 
 	</head>
