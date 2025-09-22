@@ -23,15 +23,39 @@ import { Image } from 'astro:assets';
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
         gap: 6rem;
+
+        a {
+            text-align: center;
+        }
         img {
             filter: grayscale(100%) brightness(100);
             height: auto;
-            object-size: cover;
+            object-fit: cover;
             transition: var(--default-transition);
-            width: 100%;
+            width: 70%;
 
             &:hover {
                 filter: none;
+            }
+        }
+    }
+
+    @media all and (min-width: 768px) {
+    }
+
+    @media all and (min-width: 992px) {
+        .beneficiaries {
+            
+            img {]
+                width: 85%;
+            }
+        }
+    }
+
+    @media all and (min-width: 1440px) {
+        .beneficiaries {
+            img {
+                width: 100%;
             }
         }
     }
