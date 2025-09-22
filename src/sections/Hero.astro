@@ -3,7 +3,18 @@ import heroBg from '../images/hero.webp';
 ---
 
 <section class="section section--hero">
-    <div class="hero-bg" style={`--hero-bg: url(${heroBg.src});`}></div>
+    <picture class="hero-bg">
+        <source srcset="/src/images/hero.webp" type="image/webp" />
+        <img
+            src="/src/images/hero.jpg"
+            alt="Hero"
+            width="..." height="..."
+            fetchpriority="high"
+            decoding="async"
+            loading="eager"
+        />
+    </picture>
+
     <div class="inner-container">
         <h1 class="hero__title">From St. James to Santiago</h1>
         <h3 class="hero__subTitle">What happens when you turn a personal challenge into a project to also give something back?</h3>
@@ -26,14 +37,15 @@ import heroBg from '../images/hero.webp';
     }
 
     .hero-bg {
-        background-image: var(--hero-bg);
-        background-size: cover;
-        background-position: bottom 3rem;
+        display: block;
         filter: brightness(0.5);
         height: 100vh;
-        inset-block: 0 0;
-        inset-inline: 0 0;
-        position: absolute;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
     }
 
     .hero__title {
