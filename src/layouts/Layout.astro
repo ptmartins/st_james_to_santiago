@@ -15,10 +15,19 @@ import '../styles/global.css';
 		<title>From St. James to Santiago</title>
 
 
+		<!-- Preload Google Fonts stylesheet for faster font rendering -->
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-		<link rel="preload" as="style" href="./css/flip.min.css" />
-        <link rel="stylesheet" href="./css/flip.min.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" media="print" onload="this.media='all'" />
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+		</noscript>
+
+		<!-- Defer non-critical CSS -->
+		<link rel="preload" as="style" href="/css/flip.min.css" />
+		<link rel="stylesheet" href="/css/flip.min.css" media="print" onload="this.media='all'" />
+		<noscript>
+			<link rel="stylesheet" href="/css/flip.min.css" />
+		</noscript>
 
 	</head>
 	<body>
@@ -34,6 +43,7 @@ import '../styles/global.css';
 </html>
 
 <style>
+	/* Critical CSS for above-the-fold layout and .loop button */
 	.loop {
 		align-items: center;
 		background-color: #464646;
@@ -51,7 +61,6 @@ import '../styles/global.css';
 		top: 4.5rem;
 		width: 48px;
 		z-index: 1000;
-
 		display: none;
 	}
 	.overlay {
