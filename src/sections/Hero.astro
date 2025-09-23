@@ -3,15 +3,20 @@
 ---
 
 <section class="section section--hero">
+    <!-- Preload hero image for LCP optimization -->
+    <link rel="preload" as="image" href="/images/hero.webp" imagesrcset="/images/hero.webp 1920w, /images/hero.jpg 1280w" imagesizes="100vw" />
     <picture class="hero-bg">
-        <source srcset="/images/hero.webp" type="image/webp" />
+        <source srcset="/images/hero.webp 1920w, /images/hero.jpg 1280w" type="image/webp" sizes="100vw" />
         <img
             src="/images/hero.webp"
+            srcset="/images/hero.webp 1920w, /images/hero.jpg 1280w"
+            sizes="100vw"
             alt="Hero"
-            width="..." height="..."
+            width="1920" height="1080"
             fetchpriority="high"
             decoding="async"
             loading="eager"
+            style="aspect-ratio: 16/9; width: 100%; height: auto;"
         />
     </picture>
 

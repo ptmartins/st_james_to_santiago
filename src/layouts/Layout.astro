@@ -8,6 +8,14 @@ import '../styles/global.css';
 <!doctype html>
 <html lang="en">
 	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<!-- Preload Geist font for faster LCP -->
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" media="print" onload="this.media='all'" />
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
+		</noscript>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -80,33 +88,34 @@ import '../styles/global.css';
 	}
 </style>
 
-<script>
-
-	const loop = document.querySelector('.loop');
-	if(loop){
-		loop.addEventListener('click', () => {
-			const audio = document.getElementById('piano-audio');
-			if(audio && audio instanceof HTMLAudioElement) {
-				if (audio.paused) {
-					loop.textContent = 'no_sound';
-					audio.play();
-				} else {
-					loop.textContent = 'brand_awareness';
-					audio.pause();
+<script defer>
+	window.addEventListener('DOMContentLoaded', function() {
+		const loop = document.querySelector('.loop');
+		if(loop){
+			loop.addEventListener('click', () => {
+				const audio = document.getElementById('piano-audio');
+				if(audio && audio instanceof HTMLAudioElement) {
+					if (audio.paused) {
+						loop.textContent = 'no_sound';
+						audio.play();
+					} else {
+						loop.textContent = 'brand_awareness';
+						audio.pause();
+					}
 				}
-			}
-		});
-	}
-
-	// Apply mobile class if device is mobile or screen is small - need to work on resize too
-	function checkMobile() {
-		if (window.innerWidth < 992) {
-			document.body.classList.add('is-mobile');
-		} else {
-			document.body.classList.remove('is-mobile');
+			});
 		}
-	}
 
-	window.addEventListener('resize', checkMobile);
-	checkMobile();
+		// Apply mobile class if device is mobile or screen is small - need to work on resize too
+		function checkMobile() {
+			if (window.innerWidth < 992) {
+				document.body.classList.add('is-mobile');
+			} else {
+				document.body.classList.remove('is-mobile');
+			}
+		}
+
+		window.addEventListener('resize', checkMobile);
+		checkMobile();
+	});
 </script>

@@ -30,4 +30,10 @@ It will cover approximately **675 km** from Santander to Santiago after crossing
 - Blog and updates  
 - Tips and resources for cycling the Northern Way  
 - Photo gallery and social media integration
+
+---
+
+## Performance Optimization
+
+For best performance and reduced Largest Contentful Paint (LCP), serve static assets (images, CSS, JS) from a CDN. Update asset URLs or configure your deployment to use a CDN for all public files.
 ---
