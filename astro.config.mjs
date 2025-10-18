@@ -9,6 +9,12 @@ export default defineConfig({
   vite: {
     build: {
       sourcemap: true
+    },
+    optimizeDeps: {
+      include: ['chart.js', 'chart.js/auto']
+    },
+    ssr: {
+      noExternal: ['chart.js']
     }
   }
 });

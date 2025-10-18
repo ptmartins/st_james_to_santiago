@@ -1,0 +1,89 @@
+---
+const { data } = Astro.props;
+
+const labels = data.map(activity => new Date(activity.start_date).toLocaleDateString());
+const distances = data.map(activity => (activity.distance / 1000).toFixed(2));
+
+const chartData = {
+    labels: labels,
+    datasets: [{
+        label: 'Distance (km)',
+        data: distances,
+        borderColor: 'red',
+        backgroundColor: '#ffd700',
+        tension: 0.1
+    }]
+};
+
+const chartConfig = {
+    type: 'bar',
+    data: chartData,
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#fff'
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: false
+                },
+                border: {
+                    color: '#fff'
+                },
+                ticks: {
+                    display: false
+                }
+            },
+            y: {
+                beginAtZero: true,
+                border: {
+                    color: '#fff'
+                },
+                ticks: {
+                    color: '#fff'
+                }
+            },
+        },
+        animation: {
+            onComplete: function() {
+                const ctx = this.chart.ctx;
+                ctx.font = '12px Arial';
+                ctx.fillStyle = '#fff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+
+                this.data.datasets.forEach(function(dataset, i) {
+                    const meta = this.chart.getDatasetMeta(i);
+                    meta.data.forEach(function(bar, index) {
+                        const data = labels[index];
+                        ctx.fillText(data, bar.x, bar.y - 5);
+                    });
+                }, this);
+            }
+        }
+    }
+}
+---
+
+<div class="dashboardChart">
+    <canvas id="trainingChart"></canvas>
+</div>
+
+<style>
+    .dashboardChart {
+        grid-area: 1 / 1 / 2 / 3;
+        margin-inline-end: 3rem;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script define:vars={{ chartConfig }}>
+    window.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('trainingChart').getContext('2d');
+        const trainingChart = new Chart(ctx, chartConfig);
+    });
+</script>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ActivityList from '../components/ActivityList.astro';
 import DashboardItem from '../components/DashboardItem.astro';
+import TrainingMap from '../components/TrainingMap.astro';
 
 let activities = [];
 let totalSessions = 0;
@@ -47,10 +48,13 @@ try {
 
                 <!-- Dashboard -->
                 <div class="training__dashboard">
-                  <DashboardItem type="sessions" data={ totalSessions } />
-                  <DashboardItem type="distance" data={ totalDistance } />
-                  <DashboardItem type="duration" data={ totalDurationFormatted } />
-                  <DashboardItem type="speed" data={ avgSpeed } />
+                  <TrainingMap data={ activities } />
+                  <div class="dashboardStats">
+                    <DashboardItem type="sessions" data={ totalSessions } />
+                    <DashboardItem type="distance" data={ totalDistance } />
+                    <DashboardItem type="duration" data={ totalDurationFormatted } />
+                    <DashboardItem type="speed" data={ avgSpeed } />
+                  </div>
                 </div>
 
                 <!-- Sessions -->
@@ -81,12 +85,14 @@ try {
 
   .training__dashboard {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: .75rem;
+    grid-template-columns: repeat(3, 1fr);
     margin-block-end: 9rem;
   }
 
-  .training__dashboard > * {
-    flex: 1 0 25%;
+  .dashboardStats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
   }
 </style>

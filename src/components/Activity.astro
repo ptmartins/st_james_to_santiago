@@ -19,53 +19,47 @@ const calories = calcCalories(90, data.average_speed, durationHours);
 
 <div class="activity">
     <div class="activity__content">
-        <div class="activity__header">
-            { 
-                data.sport_type === 'Ride' ? 
-                    <span class="activity__sport-type material-symbols-outlined" title="Cycle">directions_bike</span> : 
-                    <span class="activity__sport-type material-symbols-outlined" title="Run">sprint</span> 
-            }
-            <div class="activity__dateTime">
-                <div class="activity__date">{ date }</div> 
-                <div class="activity__time">{ time }</div>
-            </div>
+        { 
+            data.sport_type === 'Ride' ? 
+                <span class="activity__sport-type material-symbols-outlined" title="Cycle">directions_bike</span> : 
+                <span class="activity__sport-type material-symbols-outlined" title="Run">sprint</span> 
+        }
+        <div class="activity__dateTime">
+            <div class="activity__date">{ date }</div> 
+            <div class="activity__time">{ time }</div>
         </div>
-        <div class="activity__body">
-            <div class="data data__stats">
-                <div class="activity__data activity--duration">
-                    <span class="activity__label" title="Duration">Duration</span>
-                    <span class="activity__value">{ duration } </span>    
-                </div>
-                <div class="activity__data activity__distance"> 
-                    <span class="activity__label" title="Distance">Distance</span>
-                    <span class="activity__value">{ Number(data.distance / 1000).toFixed(3) } Km</span>    
-                </div>
-                <div class="activity__data activity__avg-speed"> 
-                    <span class="activity__label" title="Average speed">Avg. speed</span> 
-                    <span class="activity__value">{ data.avg_speed } km/h </span>
-                </div>
-                <div class="activity__data activity__elevation__gain"> 
-                    <span class="activity__label" title="Altitude gain">Alt. gain</span> 
-                    <span class="activity__value">{ data.total_elevation_gain } m</span>
-                </div>
-            </div>
-            <div class="data data__health">
-                {
-                    data.has_heartrate ? 
-                        <div class="activity__data activity__heart-rate">
-                            <span class="activity__label material-symbols-outlined" title="Heart rate">cardiology</span>
-                            <span>{ data.has_heartrate } bpm</span>
-                        </div> : null
-                }
-                <div class="activity__data activity__calories">
-                    <span class="activity__label material-symbols-outlined" title="Calories">mode_heat</span>
-                    <span>{ calories} cal</span>
-                </div>
-            </div>
+
+        <div class="activity__data activity__data--duration">
+            <span class="activity__label" title="Duration">Duration</span>
+            <span class="activity__value">{ duration } </span>    
         </div>
-        <div class="activity__footer">
+        <div class="activity__data activity__data--distance"> 
+            <span class="activity__label" title="Distance">Distance</span>
+            <span class="activity__value">{ Number(data.distance / 1000).toFixed(3) } Km</span>    
+        </div>
+        <div class="activity__data activity__data--avg-speed"> 
+            <span class="activity__label" title="Average speed">Avg. speed</span> 
+            <span class="activity__value">{ data.avg_speed } km/h </span>
+        </div>
+        <div class="activity__data activity__data--elevation-gain"> 
+            <span class="activity__label" title="Altitude gain">Alt. gain</span> 
+            <span class="activity__value">{ data.total_elevation_gain } m</span>
+        </div>
+
+        {
+            data.has_heartrate ? 
+                <div class="activity__data activity__data--heart-rate">
+                    <span class="activity__label material-symbols-outlined" title="Heart rate">cardiology</span>
+                    <span>{ data.has_heartrate } bpm</span>
+                </div> : null
+        }
+        <div class="activity__data activity__data--calories">
+            <span class="activity__label material-symbols-outlined" title="Calories">mode_heat</span>
+            <span>{ calories} cal</span>
+        </div>
+
             <a href={`https://www.strava.com/activities/${data.id}`} target="_blank" class="activity__link"> See on Strava</a>
-        </div>
+
     </div>
 </div>
 
@@ -74,12 +68,11 @@ const calories = calcCalories(90, data.average_speed, durationHours);
         background-color: var(--glass);
         border: 1px solid #222;
         border-radius: var(--border-radius);
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .95);
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .95);
         color: var(--white);
-        display: flex;
-        flex-direction: column;
         font-size: 14px;
         font-weight: 400;
+        margin-block-end: 1.5rem;
         padding: 1.5rem;
         position: relative;
     }
@@ -95,10 +88,50 @@ const calories = calcCalories(90, data.average_speed, durationHours);
         z-index: 10;
     }
 
-    .activity__header {
-        display: flex;
-        justify-content: space-between;
-        margin-block-end: 1.5rem;;
+    .activity__content {
+        display: grid;
+        gap: .75rem;
+        grid-template-columns: 60px repeat(5, 1fr);
+        grid-template-rows: minmax(30px, 1fr);
+
+        align-items: center;
+        justify-content: start;
+    }
+
+    .activity__sport-type {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .activity__dateTime {
+        grid-area: 1 / 6 / 2 / 7;
+    }
+
+    .activity__data--duration {
+        grid-area: 1 / 2 / 2 / 2;
+    }
+
+    .activity__data--distance {
+        grid-area: 1 / 3 / 2 / 4;
+    }
+
+    .activity__data--avg-speed {
+        grid-area: 1 / 4 / 2 / 5;
+    }
+
+    .activity__data--elevation-gain {
+        grid-area: 1 / 5 / 2 / 6;
+    }
+
+    .activity__data--calories {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+
+    .activity__data--heart-rate {
+        grid-area: 2 / 3 / 3 / 4;
+    }
+
+    .activity__link {
+        grid-area: 2 / 6 / 3 / 7;
     }
 
     .activity__date {
@@ -114,17 +147,14 @@ const calories = calcCalories(90, data.average_speed, durationHours);
 
     .activity__sport-type {
         align-items: center;
-        background-color: var(--black);
+        background-color: var(--accent);
         border-radius: 6px;
-        color: var(--white);
+        color: var(--black);
         display: flex;
         font-size: 2rem;
         height: 52px;
         justify-content: center;
         width: 52px;
-    }
-
-    .activity__body {
     }
 
     .data {
@@ -165,19 +195,6 @@ const calories = calcCalories(90, data.average_speed, durationHours);
         display: flex;
         flex: 0 0 33%;
         gap: .375rem;
-    }
-
-    .activity__heart-rate .activity__label,
-    .activity__calories .activity__label {
-        flex: 0 0 28px;
-        font-size: 1.5rem;
-    }
-
-    .activity__footer {
-        display: flex;
-        font-size: 1rem;
-        justify-content: flex-end;
-        margin-block-start: .75rem;
     }
 
 </style>
