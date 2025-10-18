@@ -8,3 +8,20 @@ const { activities } = Astro.props;
     <Activity data={ activity } key={ activity.id } />
   ))}
 </ul>
+
+<style>
+    .activities {
+      max-height: 50vh
+      overflow-y: auto;
+    }
+
+    .activities::-webkit-scrollbar {
+      background-color: var(--glass);
+      width: 14px;
+    }
+
+    .activities::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 12px;
+    }
+</style>

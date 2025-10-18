@@ -60,6 +60,14 @@ try {
                 <!-- Sessions -->
                 <div class="training__sessions">
                   <h2>Sessions</h2>
+                  <div class="sessions__header">
+                    <span>Duration</span>
+                    <span>Distance (km)</span>
+                    <span>Avg. speed</span>
+                    <span>Alt. gain</span>
+                    <span>Calories</span>
+                    <span>Date/Time</span>
+                  </div>
                   { activities.length > 0 ? (
                       <ActivityList activities={ activities } />
                       ) : (
@@ -94,5 +102,45 @@ try {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
+  }
+
+  .sessions__header {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 60px repeat(7, 1fr);
+    grid-template-rows: minmax(30px, 1fr);
+    padding: 1.5rem;
+  }
+
+  .sessions__header > * {
+    font-size: 16px;;
+  }
+
+  .sessions__header > :nth-child(1) {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+
+  .sessions__header > :nth-child(2) {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+
+  .sessions__header > :nth-child(3) {
+    grid-area: 1 / 4 / 2 / 5;
+  }
+
+  .sessions__header > :nth-child(4) {
+    grid-area: 1 / 5 / 2 / 6;
+  }
+
+  .sessions__header > :nth-child(5) {
+    grid-area: 1 / 6 / 2 / 7;
+  }
+
+  .sessions__header > :nth-child(6) {
+    grid-area: 1 / 7 / 2 / 8;
+  }
+
+  .sessions__header > :nth-child(7) {
+    grid-area: 1 / 8 / 2 / 9;
   }
 </style>
