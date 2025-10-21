@@ -112,6 +112,9 @@ button,
   margin-block: 3rem;
   padding: 1.5rem;
 }
+.section:first-child {
+  margin-block-start: 9rem;
+}
 
 .section:last-child {
   background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);

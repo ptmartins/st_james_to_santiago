@@ -1,0 +1,172 @@
+---
+---
+
+<div class="newsletter-subscription">   
+    <form id="newsletter-form" class="newsletter-form">
+        <div class="form-group">
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Enter your email address to subscribe for blog updates"
+                required
+                class="newsletter-input"
+            />
+            <button type="submit" class="btn newsletter-button">
+                Subscribe
+            </button>
+        </div>
+        <div id="newsletter-message" class="newsletter-message"></div>
+    </form>
+</div>
+
+<style>
+
+    .newsletter-subscription {
+        flex-grow: 1;
+        margin-inline-end: 3rem;
+        max-width: 640px;
+    }
+    
+    .newsletter-subscription h3 {
+        margin: 0 0 0.5rem 0;
+        color: var(--white);
+    }
+    
+    .newsletter-subscription p {
+        color: #ccc;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-grow: 1;
+        gap: .75rem;
+        margin: 0 0 0 auto;
+    }
+    
+    .newsletter-input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+    }
+    
+    .newsletter-input::placeholder {
+        color: #888;
+    }
+    
+    .newsletter-button {
+        padding: 0.75rem 1.5rem;
+        background-color: #007acc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .newsletter-button:hover {
+        background-color: #005999;
+    }
+    
+    .newsletter-button:disabled {
+        background-color: #666;
+        cursor: not-allowed;
+    }
+    
+    .newsletter-message {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+        display: none;
+    }
+    
+    .newsletter-message.success {
+        background-color: rgba(0, 255, 0, 0.1);
+        border: 1px solid green;
+        color: lightgreen;
+        display: block;
+    }
+    
+    .newsletter-message.error {
+        background-color: rgba(255, 0, 0, 0.1);
+        border: 1px solid red;
+        color: lightcoral;
+        display: block;
+    }
+    
+    @media (max-width: 768px) {
+        .form-group {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<script>
+    document.getElementById('newsletter-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const form = e.target as HTMLFormElement;
+        const emailInput = form.querySelector('#email') as HTMLInputElement;
+        const email = emailInput.value.trim();
+        const button = form.querySelector('.newsletter-button') as HTMLButtonElement;
+        const message = document.getElementById('newsletter-message') as HTMLElement;
+        
+        console.log('Form submitted with email:', email);
+        
+        // Reset message
+        message.className = 'newsletter-message';
+        message.style.display = 'none';
+        
+        // Validate email on frontend
+        if (!email) {
+            message.className = 'newsletter-message error';
+            message.textContent = 'Please enter an email address.';
+            return;
+        }
+        
+        // Disable button
+        button.disabled = true;
+        button.textContent = 'Subscribing...';
+        
+        try {
+            console.log('Sending request to /api/subscribe');
+            const response = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+            
+            console.log('Response status:', response.status);
+            
+            let result;
+            try {
+                result = await response.json();
+                console.log('Response data:', result);
+            } catch (parseError) {
+                console.error('Failed to parse response JSON:', parseError);
+                throw new Error('Invalid response from server');
+            }
+            
+            if (response.ok) {
+                message.className = 'newsletter-message success';
+                message.textContent = 'Successfully subscribed! Check your email for confirmation.';
+                form.reset();
+            } else {
+                throw new Error(result.error || 'Subscription failed');
+            }
+        } catch (error) {
+            console.error('Subscription error:', error);
+            message.className = 'newsletter-message error';
+            message.textContent = error instanceof Error ? error.message : 'An error occurred. Please try again.';
+        } finally {
+            button.disabled = false;
+            button.textContent = 'Subscribe';
+        }
+    });
+</script>
