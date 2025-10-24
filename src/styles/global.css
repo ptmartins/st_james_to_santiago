@@ -120,7 +120,7 @@ button,
   background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);
   margin-block-end: 0;
   padding-block-end: 12rem;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .section__title {
