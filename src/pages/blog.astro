@@ -2,46 +2,60 @@
 import Layout from "../layouts/Layout.astro";
 import Subscription from "../components/Subscription.astro";
 import { isRenderTemplateResult } from "astro/dist/runtime/server/render/astro";
+import "../styles/blog.css";
 
 // Contentful client setup
-const CONTENTFUL_SPACE_ID = 'r5mml917q80d';
-const CONTENTFUL_ACCESS_TOKEN = 'QvI4N5bUbyjWZgZJ85ndicXS3QQ-KKS7fW8cAeXWTRU';
+const CONTENTFUL_SPACE_ID = import.meta.env.CONTENTFUL_SPACE_ID;
+const CONTENTFUL_ACCESS_TOKEN = import.meta.env.CONTENTFUL_ACCESS_TOKEN;
 
 // Fetch blog posts from Contentful
 const response = await fetch(`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`);
 const data = await response.json();
 
-console.log(data.items);
+
+const assets = {};
+if (data.includes?.Asset) {
+    data.includes.Asset.forEach(asset => {
+        assets[asset.sys.id] = asset;
+    });
+}
+
 
 // Process the posts data
-const posts = data.items.map(item => ({
+const posts = data.items.map(item => {
+
+    let mediaUrl = '';
+    if (item.fields.media?.sys?.id) {
+        const asset = assets[item.fields.media.sys.id];
+        if (asset?.fields?.file?.url) {
+            mediaUrl = `https:${asset.fields.file.url}`;
+        }
+    }
+
+    return {
     id: item.sys.id,
     title: item.fields.title,
     slug: item.fields.slug,
     excerpt: item.fields.excerpt,
     content: item.fields.post.content[0].content[0].value,
     publishedDate: item.fields.date,
-    featuredImage: item.fields.featuredImage?.fields?.file?.url
-}));
-
-
-data.items.map(item => {
-    console.log(item.fields.post.content[0].content[0].value);   
+    media: mediaUrl
+    }
 });
 ---
 
 <Layout title="Blog">
     <section class="section section--blog">
         <div class="inner-container">
-            <h1 class="section__title">Blog             <Subscription /> </h1>
+            <h1 class="section__title">Blog        <button id="subscribe">subscribe</button>    <!--  <Subscription /> --> </h1>
 
             
             <div class="blog-posts">
                 {posts.map(post => (
                     <article class="blog-post">
-                        {post.featuredImage && (
+                        {post.media && (
                             <img 
-                                src={`https:${post.featuredImage}`} 
+                                src={post.media} 
                                 alt={post.title}
                                 class="blog-post__image"
                             />
@@ -67,69 +81,4 @@ data.items.map(item => {
     </section>
 </Layout>
 
-<style>
-    .section--blog .section__title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .blog-posts {
-        display: grid;
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-    
-    .blog-post {
-        background-color: var(--glass);
-        border: 1px solid #222;
-        border-radius: var(--border-radius);
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .95);
-        color: var(--white);
-        display: flex;
-        font-size: 16px;
-        font-weight: 400;
-        justify-content: space-between;
-        padding: 1.5rem;
-        position: relative;
-        width: calc(50% - .75rem);
-    }
-    
-    .blog-post:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .blog-post__image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-    
-    .blog-post__content {
-        padding: 1.5rem;
-    }
-    
-    .blog-post__title {
-        margin: 0 0 1rem 0;
-    }
-    
-    .blog-post__title a {
-        text-decoration: none;
-        color: inherit;
-    }
-    
-    .blog-post__title a:hover {
-        color: #007acc;
-    }
-    
-    .blog-post__excerpt {
-        color: #666;
-        margin-bottom: 1rem;
-    }
-    
-    .blog-post__date {
-        color: #888;
-        font-size: 0.9rem;
-    }
-</style>

@@ -1,4 +1,6 @@
 ---
+import '../styles/dashboardItem.css';
+
 const { type, data } = Astro.props;
 let label;
 let subLabel;
@@ -41,63 +43,3 @@ switch(type.toLowerCase()) {
 
 </div>
 
-<style>
-    .dashboardItem {
-        background-color: var(--glass);
-        border: 1px solid #222;
-        border-radius: var(--border-radius);
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .95);
-        color: var(--white);
-        display: flex;
-        font-size: 16px;
-        font-weight: 400;
-        justify-content: space-between;
-        padding: 1.5rem;
-        position: relative;
-        width: calc(50% - .75rem);
-    }
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .label,
-    .subLabel {
-        letter-spacing: -0.5px;
-        margin-block: 0;
-    }
-
-    .label {
-        width: calc(100% - 56px);
-    }
-
-    .subLabel {
-        opacity: .5;
-    }
-
-    .data {
-        font-size: 2.4rem;
-        margin-block: auto .75rem;
-    }
-
-    .unit {
-        font-size: 18px;
-        margin-inline-start: .75rem;
-        text-transform: initial;
-    }
-
-    .icon {
-        background-color: var(--accent);
-        border-radius: 6px;
-        color: var(--black);
-        display: grid;
-        font-size: 42px;
-        height: 48px;
-        inset-inline-end: 1.5rem;
-        place-items: center;
-        position: absolute;
-        width: 48px;
-    }
-</style>

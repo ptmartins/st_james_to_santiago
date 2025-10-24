@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import ActivityList from '../components/ActivityList.astro';
 import DashboardItem from '../components/DashboardItem.astro';
-import TrainingMap from '../components/TrainingMap.astro';
+import TrainingChart from '../components/TrainingChart.astro';
+import '../styles/training.css';  
 
 let activities = [];
 let totalSessions = 0;
@@ -48,7 +49,7 @@ try {
 
                 <!-- Dashboard -->
                 <div class="training__dashboard">
-                  <TrainingMap data={ activities } />
+                  <TrainingChart data={ activities } />
                   <div class="dashboardStats">
                     <DashboardItem type="sessions" data={ totalSessions } />
                     <DashboardItem type="distance" data={ totalDistance } />
@@ -77,70 +78,3 @@ try {
         </div>
     </section>
 </Layout>
-
-<style>
-
-  h2 {
-    margin-block-end: 3rem;
-  }
-  .section--training {
-    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);
-    height: 100%;
-    margin-block-end: 0;
-    min-height: 100vh;
-    padding-block-end: 9rem;
-  }
-
-  .training__dashboard {
-    display: grid;
-    gap: .75rem;
-    grid-template-columns: repeat(3, 1fr);
-    margin-block-end: 9rem;
-  }
-
-  .dashboardStats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-
-  .sessions__header {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: 60px repeat(7, 1fr);
-    grid-template-rows: minmax(30px, 1fr);
-    padding: 1.5rem;
-  }
-
-  .sessions__header > * {
-    font-size: 16px;;
-  }
-
-  .sessions__header > :nth-child(1) {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-
-  .sessions__header > :nth-child(2) {
-    grid-area: 1 / 3 / 2 / 4;
-  }
-
-  .sessions__header > :nth-child(3) {
-    grid-area: 1 / 4 / 2 / 5;
-  }
-
-  .sessions__header > :nth-child(4) {
-    grid-area: 1 / 5 / 2 / 6;
-  }
-
-  .sessions__header > :nth-child(5) {
-    grid-area: 1 / 6 / 2 / 7;
-  }
-
-  .sessions__header > :nth-child(6) {
-    grid-area: 1 / 7 / 2 / 8;
-  }
-
-  .sessions__header > :nth-child(7) {
-    grid-area: 1 / 8 / 2 / 9;
-  }
-</style>
