@@ -33,13 +33,13 @@ const posts = data.items.map(item => {
     }
 
     return {
-    id: item.sys.id,
-    title: item.fields.title,
-    slug: item.fields.slug,
-    excerpt: item.fields.excerpt,
-    content: item.fields.post.content[0].content[0].value,
-    publishedDate: item.fields.date,
-    media: mediaUrl
+        id: item.sys.id,
+        title: item.fields.title,
+        slug: item.fields.slug,
+        excerpt: item.fields.excerpt,
+        content: item.fields.post.content[0].content[0].value,
+        publishedDate: item.fields.date,
+        media: mediaUrl
     }
 });
 ---
@@ -53,27 +53,24 @@ const posts = data.items.map(item => {
             <div class="blog-posts">
                 {posts.map(post => (
                     <article class="blog-post">
-                        {post.media && (
-                            <img 
-                                src={post.media} 
-                                alt={post.title}
-                                class="blog-post__image"
-                            />
-                        )}
-                        <div class="blog-post__content">
-                            <h2 class="blog-post__title">
-                                <a href={`/blog/${post.slug}`}>{post.title}</a>
-                            </h2>
-                            {post.excerpt && (
-                                <p class="blog-post__excerpt">{post.excerpt}</p>
+                        <a href={`/blog/${post.slug}`} class="blog-post__link">
+                            {post.media && (
+                                <img 
+                                    src={post.media} 
+                                    alt={post.title}
+                                    class="blog-post__image"
+                                />
                             )}
-                            <time class="blog-post__date">
-                                {new Date(post.publishedDate).toLocaleDateString()}
-                            </time>
-                            <div class="">
-                                {post.content}
+                            <div class="blog-post__content">
+                                <h2 class="blog-post__title">{post.title}</h2>
+                                {post.excerpt && (
+                                    <p class="blog-post__excerpt">{post.excerpt}</p>
+                                )}
+                                <time class="blog-post__date">
+                                    {new Date(post.publishedDate).toLocaleDateString()}
+                                </time>
                             </div>
-                        </div>
+                        </a>
                     </article>
                 ))}
             </div>

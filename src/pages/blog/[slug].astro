@@ -1,0 +1,331 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/blog.css';
+
+// Server-side rendering for dynamic routes
+export const prerender = false;
+
+// Contentful client setup  
+const CONTENTFUL_SPACE_ID = import.meta.env.CONTENTFUL_SPACE_ID;
+const CONTENTFUL_ACCESS_TOKEN = import.meta.env.CONTENTFUL_ACCESS_TOKEN;
+
+// Get the slug from the URL params
+const { slug } = Astro.params;
+
+// Fetch the specific post data
+let post: any = null;
+let error: string | null = null;
+
+try {
+  if (!CONTENTFUL_SPACE_ID || !CONTENTFUL_ACCESS_TOKEN) {
+    throw new Error('Contentful environment variables are not configured');
+  }
+  
+  // Fetch all posts and find the one with matching slug
+  const response = await fetch(`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`);
+  const data = await response.json();
+
+  const assets: any = {};
+  if (data.includes?.Asset) {
+    data.includes.Asset.forEach((asset: any) => {
+      assets[asset.sys.id] = asset;
+    });
+  }
+
+  // Find the post with matching slug
+  const foundItem = data.items.find((item: any) => item.fields.slug === slug);
+  
+  if (foundItem) {
+    let mediaUrl = '';
+    if (foundItem.fields.media?.sys?.id) {
+      const asset = assets[foundItem.fields.media.sys.id];
+      if (asset?.fields?.file?.url) {
+        mediaUrl = `https:${asset.fields.file.url}`;
+      }
+    }
+
+    post = {
+      id: foundItem.sys.id,
+      title: foundItem.fields.title,
+      slug: foundItem.fields.slug,
+      excerpt: foundItem.fields.excerpt,
+      content: foundItem.fields.post,
+      publishedDate: foundItem.fields.date,
+      media: mediaUrl
+    };
+  } else {
+    error = `Post with slug "${slug}" not found`;
+  }
+} catch (e) {
+  error = `Error fetching post: ${(e as Error).message}`;
+}
+
+// Debug logging (can be removed in production)
+console.log('Accessing blog post:', slug, post ? '✓' : '✗');
+
+// Function to render rich text content from Contentful
+function renderRichText(content: any): string {
+  // Handle different content structures
+  if (!content) return '';
+  
+  // If content is already a string (fallback from the blog index processing)
+  if (typeof content === 'string') {
+    return `<p>${content}</p>`;
+  }
+  
+  // If content is the rich text document structure
+  if (!content.content || !Array.isArray(content.content)) {
+    console.warn('Invalid content structure:', content);
+    return '';
+  }
+  
+  return content.content.map((node: any) => {
+    if (!node || !node.nodeType) return '';
+    
+    switch (node.nodeType) {
+      case 'paragraph':
+        const paragraphText = node.content?.map((textNode: any) => textNode.value || '').join('') || '';
+        return `<p>${paragraphText}</p>`;
+      case 'heading-1':
+        const h1Text = node.content?.map((textNode: any) => textNode.value || '').join('') || '';
+        return `<h1>${h1Text}</h1>`;
+      case 'heading-2':
+        const h2Text = node.content?.map((textNode: any) => textNode.value || '').join('') || '';
+        return `<h2>${h2Text}</h2>`;
+      case 'heading-3':
+        const h3Text = node.content?.map((textNode: any) => textNode.value || '').join('') || '';
+        return `<h3>${h3Text}</h3>`;
+      case 'unordered-list':
+        const listItems = node.content?.map((listItem: any) => {
+          const itemText = listItem.content?.[0]?.content?.map((textNode: any) => textNode.value || '').join('') || '';
+          return `<li>${itemText}</li>`;
+        }).join('') || '';
+        return `<ul>${listItems}</ul>`;
+      case 'ordered-list':
+        const orderedItems = node.content?.map((listItem: any) => {
+          const itemText = listItem.content?.[0]?.content?.map((textNode: any) => textNode.value || '').join('') || '';
+          return `<li>${itemText}</li>`;
+        }).join('') || '';
+        return `<ol>${orderedItems}</ol>`;
+      default:
+        console.warn('Unknown node type:', node.nodeType);
+        return '';
+    }
+  }).join('');
+}
+
+let renderedContent = '';
+if (post?.content) {
+  renderedContent = renderRichText(post.content);
+}
+
+// If no content was rendered and we have a post, try to show something
+if (!renderedContent && post) {
+  renderedContent = '<p>Content is being processed...</p>';
+}
+---
+
+{error && (
+  <Layout title="Error">
+    <section class="section section--blog-post">
+      <div class="inner-container">
+        <h1>Error Loading Post</h1>
+        <p>{error}</p>
+        <a href="/blog">← Back to Blog</a>
+      </div>
+    </section>
+  </Layout>
+)}
+
+{post && (
+  <Layout title={post.title}>
+  <section class="section section--blog-post">
+    <div class="inner-container">
+      <article class="blog-post-full">
+        <header class="blog-post-full__header">
+          <nav class="breadcrumb">
+            <a href="/blog">← Back to Blog</a>
+          </nav>
+          
+          <h1 class="blog-post-full__title">{post.title}</h1>
+          
+          <div class="blog-post-full__meta">
+            <time class="blog-post-full__date" datetime={post.publishedDate}>
+              {new Date(post.publishedDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          </div>
+
+          {post.excerpt && (
+            <p class="blog-post-full__excerpt">{post.excerpt}</p>
+          )}
+        </header>
+
+        {post.media && (
+          <div class="blog-post-full__image">
+            <img 
+              src={post.media} 
+              alt={post.title}
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        <div class="blog-post-full__content" set:html={renderedContent || '<p>Content could not be loaded.</p>'}></div>
+      </article>
+    </div>
+  </section>
+  </Layout>
+)}
+
+<style>
+  /* .section--blog-post {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
+  }
+
+  .blog-post-full {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--primary, #007acc);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--primary-dark, #005999);
+  }
+
+  .blog-post-full__header {
+    margin-bottom: 3rem;
+  }
+
+  .blog-post-full__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #333);
+  }
+
+  .blog-post-full__meta {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-post-full__date {
+    color: var(--text-muted, #666);
+    font-size: 0.9rem;
+  }
+
+  .blog-post-full__excerpt {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary, #555);
+    font-style: italic;
+    border-left: 4px solid var(--primary, #007acc);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .blog-post-full__image {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-post-full__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-post-full__content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-primary, #333);
+  }
+
+  /* Content styling */
+  .blog-post-full__content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-post-full__content :global(h1),
+  .blog-post-full__content :global(h2),
+  .blog-post-full__content :global(h3) {
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #333);
+  }
+
+  .blog-post-full__content :global(h1) {
+    font-size: 2rem;
+  }
+
+  .blog-post-full__content :global(h2) {
+    font-size: 1.5rem;
+  }
+
+  .blog-post-full__content :global(h3) {
+    font-size: 1.25rem;
+  }
+
+  .blog-post-full__content :global(ul),
+  .blog-post-full__content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .blog-post-full__content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-post-full__content :global(blockquote) {
+    border-left: 4px solid var(--primary, #007acc);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-secondary, #555);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .section--blog-post {
+      padding-top: 6rem;
+      padding-bottom: 2rem;
+    }
+
+    .blog-post-full__title {
+      font-size: 2rem;
+    }
+
+    .blog-post-full__content {
+      font-size: 1rem;
+    }
+
+    .blog-post-full__content :global(h1) {
+      font-size: 1.75rem;
+    }
+
+    .blog-post-full__content :global(h2) {
+      font-size: 1.375rem;
+    }
+
+    .blog-post-full__content :global(h3) {
+      font-size: 1.125rem;
+    }
+  } */
+</style>
