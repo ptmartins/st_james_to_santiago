@@ -1,11 +1,25 @@
 ---
+import { Calendar, MapPin, Clock, Zap } from 'lucide-static';
+
 const { title, icon, value } = Astro.props;
+
+// Map some Material icon names to Lucide equivalents
+const iconMap: Record<string, string> = {
+    'calendar_month': Calendar,
+    'location_on': MapPin,
+    'schedule': Clock,
+    'speed': Zap,
+};
+
+const lucideIcon = iconMap[icon] ?? icon;
 ---
 
 <div class="stat__item">
     <h3 class="stat__title"> {title} </h3>
     <div class="stat__content">
-        <span class="material-symbols-outlined stat__icon"> {icon} </span> 
+        <span class="stat__icon">
+            <Fragment set:html={lucideIcon} />
+        </span>
         <span class="stat__value"> {value} </span>
     </div>
 </div>
@@ -33,6 +47,14 @@ const { title, icon, value } = Astro.props;
     .stat__icon {
         font-size: 3rem;
         opacity: .5;
+    }
+
+    /* Lucide SVG sizing */
+    .stat__icon svg {
+        width: 3rem;
+        height: 3rem;
+        opacity: .5;
+        display: inline-block;
     }
 
     .stat__value {

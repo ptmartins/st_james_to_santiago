@@ -1,5 +1,6 @@
 ---
 import '../styles/dashboardItem.css';
+import { Calendar, MapPin, Clock, Zap } from 'lucide-static';
 
 const { type, data } = Astro.props;
 let label;
@@ -11,13 +12,13 @@ switch(type.toLowerCase()) {
     case 'sessions':
         label = 'Sessions';
         subLabel = 'All time sessions';
-        icon = 'calendar_month'
+            icon = 'calendar_month'
         break;
     case 'distance':
         label = 'Distance';
         subLabel = `Total Km's cycled`;
         unit = 'Km';
-        icon = 'location_on';
+            icon = 'location_on';
         break;
     case 'duration':
         label = 'Duration';
@@ -31,6 +32,16 @@ switch(type.toLowerCase()) {
         icon = 'speed';
         break;
 }
+
+    // Map material icon names to Lucide equivalents
+    const iconMap: Record<string, string> = {
+        'calendar_month': Calendar,
+        'location_on': MapPin,
+        'schedule': Clock,
+        'speed': Zap,
+    };
+
+    const lucideIcon = icon ? iconMap[icon] ?? icon : '';
 ---
 
 <div class="dashboardItem">
@@ -39,7 +50,18 @@ switch(type.toLowerCase()) {
         <h2 class="data"> { data } <span class="unit"> { unit } </span> </h2>
         <p class="subLabel"> { subLabel } </p>
     </div>
-    <div class="icon material-symbols-outlined"> { icon } </div>
+    <div class="icon">
+        <Fragment set:html={lucideIcon} />
+    </div>
 
 </div>
+
+
+<style>
+    .icon svg {
+        width: 3rem;
+        height: 3rem;
+        display: inline-block;
+    }
+</style>
 
