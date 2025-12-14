@@ -45,6 +45,7 @@ body {
 
 /* Accessibility: Improve contrast for tick-credits */
 .tick-credits {
+  bottom: -1rem !important;
   color: #ffd700 !important; /* bright yellow for contrast on black */
   opacity: 0.85 !important;
   text-shadow: 0 1px 2px #000;

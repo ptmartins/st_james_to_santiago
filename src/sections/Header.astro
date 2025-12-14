@@ -24,12 +24,12 @@ import Navigation from '../components/Navigation.astro';
         box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.9);
         inset-inline-start: 50%;
         padding-block: .75rem;
-        padding-inline: 3rem;
+        padding-inline: 1.5rem;
         position: fixed;
-        top: 3rem;
+        top: 0;
         transform: translateX(-50%);
         transition: var(--default-transition);
-        width: calc(var(--inner-container-width) + 6rem);
+        width: 100%;
         z-index: 9999;
     }
 
@@ -57,7 +57,7 @@ import Navigation from '../components/Navigation.astro';
     :global(.is-mobile) {
         .btn--cta {
             order: -1;
-            margin-inline-end: 2.5rem;
+            margin-inline-end: .75rem;
         }
     }
 
@@ -67,9 +67,11 @@ import Navigation from '../components/Navigation.astro';
         }
     }
 
-    @meida all and (min-width: 1440px) {
-        header {
-            width: 100%;
+    @media all and (min-width: 1440px) {
+        .header {
+            padding-inline: 3rem;
+            top: 3rem;
+            width: calc(var(--inner-container-width) + 6rem);
         }
     }
 </style>
