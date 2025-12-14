@@ -23,14 +23,13 @@ import Navigation from '../components/Navigation.astro';
         background-color: var(--black);
         box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.9);
         inset-inline-start: 50%;
-        max-width: var(--inner-container-width);
         padding-block: .75rem;
         padding-inline: 3rem;
         position: fixed;
         top: 3rem;
         transform: translateX(-50%);
         transition: var(--default-transition);
-        width: calc(100% + 3rem);
+        width: calc(var(--inner-container-width) + 6rem);
         z-index: 9999;
     }
 
@@ -47,7 +46,7 @@ import Navigation from '../components/Navigation.astro';
     .header__logo,
     .header__logo a {
         align-items: center;
-        display: flex;
+        display: flex; 
     }
 
     .header__nav {
@@ -64,7 +63,6 @@ import Navigation from '../components/Navigation.astro';
 
     :global(:not(.is-mobile)) {
         .btn--cta {
-            margin-inline-end: .75rem;
             margin-inline-start: 2.5rem;
         }
     }

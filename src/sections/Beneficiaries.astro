@@ -9,12 +9,26 @@ import '../styles/beneficiaries.css';
     <div class="inner-container">
         <h2 class="section__title">Beneficiaries</h2>
         <div class="beneficiaries">
-            <a href="https://www.cancerresearchuk.org/" target="_blank" rel="noopener">
+            <a href="https://www.cancerresearchuk.org/" target="_blank" rel="noopener" class="beneficiary">
                 <Image src={crUK} alt="Cancer Research UK" class="beneficiary__logo" />
             </a>
-            <a href="https://act4addenbrookes.org.uk/" target="_blank" rel="noopener">
+            <a href="https://act4addenbrookes.org.uk/" target="_blank" rel="noopener" class="beneficiary">
                 <Image src={act} alt="Addenbrooke's Charitable Trust" class="beneficiary__logo" />
             </a>
         </div>
     </div>
 </section>
+
+
+<style>
+    .beneficiary {
+        align-items: center;
+        background-color: var(--glass);
+        border: 1px solid #222;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .98);
+        display: flex;
+        padding: .75rem;
+        place-self: normal;
+    }
+</style>

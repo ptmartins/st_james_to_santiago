@@ -1,39 +1,55 @@
 ---
-import { Calendar, MapPin, Clock, Zap } from 'lucide-static';
+import { CalendarClock, Route, SmartphoneCharging, Gauge, TrendingUp, MountainSnow } from 'lucide-static';
 
 const { title, icon, value } = Astro.props;
 
 // Map some Material icon names to Lucide equivalents
 const iconMap: Record<string, string> = {
-    'calendar_month': Calendar,
-    'location_on': MapPin,
-    'schedule': Clock,
-    'speed': Zap,
+    'calendar_clock': CalendarClock,
+    'route': Route,
+    'energy': SmartphoneCharging,
+    'speed': Gauge, 
+    'altitude': TrendingUp, 
+    'highest': MountainSnow, 
 };
 
 const lucideIcon = iconMap[icon] ?? icon;
 ---
 
 <div class="stat__item">
-    <h3 class="stat__title"> {title} </h3>
-    <div class="stat__content">
+    <div class="stat__header">
+        <h3 class="stat__title"> {title} </h3>
         <span class="stat__icon">
             <Fragment set:html={lucideIcon} />
         </span>
+    </div>
+    <div class="stat__content">
         <span class="stat__value"> {value} </span>
     </div>
 </div>
 
 <style>
 
-    /* .stat__item {
-        justify-self: start;
-    } */
-    .stat__title {
+    .stat__item {
+        background-color: var(--glass);
+        border: 1px solid #222;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 30px 0 rgba(0, 0, 0, .98);
+        padding: 3rem;
+        place-self: normal;
+    }
+
+    .stat__header {
+        align-items: 
         color: var(--yellow);
-        font-size: 1.3rem;
+        display: flex;
+        justify-content: space-between;
+        margin-block-end: .75rem;
+    }
+
+    .stat__title {
+        font-size: 1.8rem;
         font-weight: 500;
-        margin-bottom: .75rem;
         opacity: .85;
         text-align: center;
     }
@@ -45,8 +61,14 @@ const lucideIcon = iconMap[icon] ?? icon;
     }
 
     .stat__icon {
-        font-size: 3rem;
-        opacity: .5;
+        align-items: center;
+        background-color: var(--yellow);
+        border-radius: var(--border-radius);
+        color: var(--black);
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        width: 48px;
     }
 
     /* Lucide SVG sizing */

@@ -3,6 +3,10 @@ const { data } = Astro.props;
 
 const labels = data.map(activity => new Date(activity.start_date).toLocaleDateString());
 const distances = data.map(activity => (activity.distance / 1000).toFixed(2));
+const chartStyles = {
+    axisLineColor: '#4a4e4f',
+    axisLineWidth: 2
+}
 
 const chartData = {
     labels: labels,
@@ -32,7 +36,8 @@ const chartConfig = {
                     display: false
                 },
                 border: {
-                    color: '#fff'
+                    color: chartStyles.axisLineColor,
+                    width: chartStyles.axisLineWidth
                 },
                 ticks: {
                     display: false
@@ -41,7 +46,8 @@ const chartConfig = {
             y: {
                 beginAtZero: true,
                 border: {
-                    color: '#fff'
+                    color: chartStyles.axisLineColor,
+                    width: chartStyles.axisLineWidth
                 },
                 ticks: {
                     color: '#fff'
