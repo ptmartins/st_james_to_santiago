@@ -1,17 +1,53 @@
 ---
- 
+
 ---
 
 <section class="section section--intro">
     <div class="inner-container">
         <p>Hey,</p>
-        <p>I'm Pedro, a 50-year-old who decided it was time for shedding those extra pounds I've been carrying for the last 10-15 years, embracing fitness, and proving that it’s never too late to change bad habits. My journey isn’t just about personal transformation. It’s also about making some difference during that process.</p>
-        <p>This next year, I'm embarking on an inspiring cycling adventure — pushing past comfort zones, scaling new heights, and riding hundreds of miles. The goal? To raise vital funds for <a href="https://www.cancerresearchuk.org/" target="_blank">Cancer Research UK</a> and <a href="https://act4addenbrookes.org.uk/" target="_blank">Addenbrooke's Charitable Trust</a>.</p>
-        <p>Armed with nothing but determination, my sturdy 20 y.o. <a href="https://www.specialized.com/us/en/05-fsr-xc-comp/p/439?color=14388-439&searchText=9352-3255" target="_blank">Specialized FSR XC Comp</a>  bike, and a heart full of purpose, I'm inviting friends, family, and community to join in. Every mile pedaled represents not just physical strides but much needed funding for those organisations.</p>
-        <p>Follow my journey, cheer on the effort, and discover how one person’s decision to challenge themselves can ripple out to uplift others, inspire change, and fuel hope where it’s needed most.</p>
+        <p>
+            I'm Pedro, a 50-year-old who's made a New Year's resolution that
+            goes beyond simply dropping those extra pounds I've carried for the
+            last 10-15 years. This year, I'm committing to a journey that will
+            test my limits and transform my life — cycling from London to
+            Santiago de Compostela, arriving in time to celebrate my 51st
+            birthday on 10 June 2027.
+        </p>
+        <p>
+            With a year and a half to prepare, this isn't just about personal
+            transformation or proving it's never too late to change bad habits.
+            It's about making a real difference along the way
+        </p>
+        <p>
+            This epic cycling adventure will push me past every comfort zone,
+            scale countless heights, and cover hundreds of miles across 2
+            countries. But the destination is more than a personal milestone —
+            it's a mission to raise vital funds for<a
+                href="https://www.cancerresearchuk.org/"
+                target="_blank">Cancer Research UK</a
+            > and <a href="https://act4addenbrookes.org.uk/" target="_blank"
+                >Addenbrooke's Charitable Trust</a
+            >.
+        </p>
+        <p>
+            Armed with nothing but determination, my sturdy 20 y.o. <a
+                href="https://www.specialized.com/us/en/05-fsr-xc-comp/p/439?color=14388-439&searchText=9352-3255"
+                target="_blank">Specialized FSR XC Comp</a
+            > bike, and a heart full of purpose, I'm inviting friends, family, and
+            community to join in. Every mile I pedal represents not just physical
+            strides toward Santiago, but crucial funding for these organisations that
+            touch so many lives.
+        </p>
+        <p>
+            The preparation begins now. The training, the planning, the small
+            victories and setbacks — it's all part of the story. Follow along as
+            I work toward this goal, cheer on the effort, and discover how one
+            person's decision to challenge themselves can ripple out to uplift
+            others, inspire change, and fuel hope where it's needed most.
+        </p>
         <p>Ready to join the ride? Let’s make every turn of the wheel count.</p>
-        <p>The clock is ticking!</p>
-    
+        <p>The clock is ticking - Santiago awaits!</p>
+
         <div class="tick" data-did-init="handleTickInit">
             <div
                 data-repeat="true"
@@ -27,7 +63,8 @@
                         <span data-view="flip"></span>
                     </div>
 
-                    <span data-key="label" data-view="text" class="tick-label"></span>
+                    <span data-key="label" data-view="text" class="tick-label"
+                    ></span>
                 </div>
             </div>
         </div>
@@ -39,11 +76,11 @@
         min-height: unset;
     }
 
-     .tick {
-        font-family:arial,sans-serif;
-        font-size:1rem; 
+    .tick {
+        font-family: arial, sans-serif;
+        font-size: 1rem;
         margin-block-start: 7.5rem;
-        white-space:nowrap; 
+        white-space: nowrap;
     }
 
     .tick-flip,
@@ -57,53 +94,51 @@
     }
 
     .tick-char {
-        width:1.5em;
+        width: 1.5em;
     }
 
     .tick-text-inline {
-        display:inline-block;
-        text-align:center;
-        min-width:1em;
+        display: inline-block;
+        text-align: center;
+        min-width: 1em;
     }
 
-    .tick-text-inline+.tick-text-inline {
-        margin-left:-.325em;
+    .tick-text-inline + .tick-text-inline {
+        margin-left: -0.325em;
     }
 
     .tick-group {
-        margin:0 .5em;
-        text-align:center;
+        margin: 0 0.5em;
+        text-align: center;
     }
 
     .tick-text-inline {
-        color: rgb(90, 93, 99) !important; 
+        color: rgb(90, 93, 99) !important;
     }
 
     .tick-label {
-        color: rgb(255, 255, 255) !important; 
+        color: rgb(255, 255, 255) !important;
     }
 
     .tick-flip-panel {
-        color: rgb(255, 255, 255) !important; 
+        color: rgb(255, 255, 255) !important;
     }
 
     .tick-flip {
-        font-family: !important; 
+        font-family: !important;
     }
 
     .tick-flip-panel-text-wrapper {
-        line-height: 1.45 !important; 
+        line-height: 1.45 !important;
     }
 
     .tick-flip-panel {
-        background-color: rgb(59, 61, 59) !important; 
+        background-color: rgb(59, 61, 59) !important;
     }
 
     .tick-flip {
-        border-radius:0.12em !important; 
+        border-radius: 0.12em !important;
     }
-
-
 
     @media all and (min-width: 768px) {
     }
@@ -120,39 +155,39 @@
 
 <script is:inline>
     function handleTickInit(tick) {
-
         // get timer offset (if not found, set to today)
-        var offset = new Date( localStorage.getItem('countdown-offset') || new Date() );
+        var offset = new Date(
+            localStorage.getItem("countdown-offset") || new Date()
+        );
 
         // store the offset (not really necessary but saves some if statements)
-        localStorage.setItem('countdown-offset', offset);
+        localStorage.setItem("countdown-offset", offset);
 
         // time in hours the timer will run down
-        var timeDuration = Tick.helper.duration(1, 'days');
+        var timeDuration = Tick.helper.duration(1, "days");
 
         // add 24 hours to get final deadline
-        var deadline = new Date('2026-10-06T00:00:00Z');
+        var deadline = new Date("2026-10-06T00:00:00Z");
 
         // create counter
-        var counter = Tick.count.down(deadline, { format: ['d', 'h' ,'m', 's'] } );
+        var counter = Tick.count.down(deadline, {
+            format: ["d", "h", "m", "s"],
+        });
 
         // update tick with the counter value
-        counter.onupdate = function(value) {
+        counter.onupdate = function (value) {
             tick.value = value;
         };
 
-        counter.onended = function() {
+        counter.onended = function () {
             // redirect, uncomment the next line
             // window.location = 'my-location.html'
-
             // hide counter, uncomment the next line
             // tick.root.style.display = 'none';
-
             // show message, uncomment the next line
             // document.querySelector('.tick-onended-message').style.display = '';
         };
     }
 </script>
-
 
 <script is:inline src="/js/flip.min.js" defer></script>
