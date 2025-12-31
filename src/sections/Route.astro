@@ -1,17 +1,14 @@
 ---
 import LeafletMap from "../components/LeafletMap.jsx";
 import Stop from "../components/Stop.astro";
-import { route } from '../data/data.js';
+import { route } from "../data/data.js";
 ---
 
 <section class="section section--itinerary">
     <div class="inner-container">
         <h2 class="section__title">Itinerary</h2>
         <div class="routes">
-
-            {
-                route.map( item => <Stop data={ item } /> )
-            }
+            {route.map((item) => <Stop data={item} />)}
         </div>
         <div class="route__map">
             <LeafletMap client:only="react" />
