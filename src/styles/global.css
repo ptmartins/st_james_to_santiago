@@ -113,7 +113,7 @@ button,
   margin-block: 3rem;
   padding: 1.5rem;
 }
-.section:first-child {
+.section:first-child:not(.section--hero) {
   margin-block-start: 9rem;
 }
 
