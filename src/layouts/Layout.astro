@@ -1,9 +1,9 @@
 ---
-import Header from '../sections/Header.astro';
-import Footer from '../sections/Footer.astro';
-import overlay from '../images/fuzz.avif';
-import '../styles/global.css';
-import { Music, VolumeX } from 'lucide-static';
+import Header from "../sections/Header.astro";
+import Footer from "../sections/Footer.astro";
+import overlay from "../images/fuzz.avif";
+import "../styles/global.css";
+import { Music, VolumeX } from "lucide-static";
 
 const musicIconSvg = Music;
 const volumeXIconSvg = VolumeX;
@@ -11,139 +11,180 @@ const volumeXIconSvg = VolumeX;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<!-- Preload Geist font for faster LCP -->
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" media="print" onload="this.media='all'" />
-		<noscript>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
-		</noscript>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="From St. James to Santiago: A personal challenge turned into a project to give back. Follow the journey, discover the route, and support the cause." />
-		<title>From St. James to Santiago</title>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Preload Geist font for faster LCP -->
+        <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+            media="print"
+            onload="this.media='all'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+            />
+        </noscript>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            name="description"
+            content="From St. James to Santiago: A personal challenge turned into a project to give back. Follow the journey, discover the route, and support the cause."
+        />
+        <title>From St. James to Santiago</title>
 
-		<meta property="og:title" content="From St. James to Santiago - Charity Cycling Challenge" />
-		<meta property="og:description" content="Follow Pedro's 686km cycling journey from London to Santiago de Compostela, raising funds for Cancer Research UK and Addenbrooke's Charitable Trust." />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:image" content="/images/hero.webp" />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="From St. James to Santiago - Charity Cycling Challenge" />
-		<meta name="twitter:description" content="Follow Pedro's 686km cycling journey from London to Santiago de Compostela, raising funds for Cancer Research UK and Addenbrooke's Charitable Trust." />
-		<meta name="twitter:image" content="/images/hero.webp" />
-		<meta name="author" content="Pedro Martins" />
-		<meta name="keywords" content="charity cycling, camino del norte, cancer research, fundraising, santiago de compostela, cycling challenge" />
-		<link rel="canonical" href={Astro.url} />
+        <meta
+            property="og:title"
+            content="From St. James to Santiago - Charity Cycling Challenge"
+        />
+        <meta
+            property="og:description"
+            content="Follow Pedro's 686km cycling journey from London to Santiago de Compostela, raising funds for Cancer Research UK and Addenbrooke's Charitable Trust."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:image" content="/images/hero.webp" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="From St. James to Santiago - Charity Cycling Challenge"
+        />
+        <meta
+            name="twitter:description"
+            content="Follow Pedro's 686km cycling journey from London to Santiago de Compostela, raising funds for Cancer Research UK and Addenbrooke's Charitable Trust."
+        />
+        <meta name="twitter:image" content="/images/hero.webp" />
+        <meta name="author" content="Pedro Martins" />
+        <meta
+            name="keywords"
+            content="charity cycling, camino del norte, cancer research, fundraising, santiago de compostela, cycling challenge"
+        />
+        <link rel="canonical" href={Astro.url} />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/hero.webp"
+            imagesrcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
+            imagesizes="100vw"
+        />
 
-		<!-- Defer non-critical CSS -->
-		<link rel="preload" as="style" href="/css/flip.min.css" />
-		<link rel="stylesheet" href="/css/flip.min.css" media="print" onload="this.media='all'" />
-		<noscript>
-			<link rel="stylesheet" href="/css/flip.min.css" />
-		</noscript>
-
-	</head>
-	<body>
-		<audio id="piano-audio" src="/audio/piano-loop.mp3" loop></audio>
-		<button class="loop" id="music-toggle" title="Toggle background music">
-			<Fragment set:html={Music} />
-		</button>
-		<Header />
-		<main class="main">
-			<slot />
-		</main>
-		<Footer />
-		<div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
-	</body>
+        <!-- Defer non-critical CSS -->
+        <link rel="preload" as="style" href="/css/flip.min.css" />
+        <link
+            rel="stylesheet"
+            href="/css/flip.min.css"
+            media="print"
+            onload="this.media='all'"
+        />
+        <noscript>
+            <link rel="stylesheet" href="/css/flip.min.css" />
+        </noscript>
+    </head>
+    <body>
+        <audio id="piano-audio" src="/audio/piano-loop.mp3" loop></audio>
+        <button class="loop" id="music-toggle" title="Toggle background music">
+            <Fragment set:html={Music} />
+        </button>
+        <Header />
+        <main class="main">
+            <slot />
+        </main>
+        <Footer />
+        <div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
+    </body>
 </html>
 
 <style>
-	/* Critical CSS for above-the-fold layout and .loop button */
-	.loop {
-		align-items: center;
-		background-color: #464646;
-		border: none;
-		border-radius: 50%;
-		color: var(--white);
-		cursor: pointer;
-		display: flex;
-		font-size: 2.1rem;
-		height: 48px;
-		justify-content: center;
-		padding: 0.5rem 1rem;
-		position: fixed;
-		right: 3rem;
-		top: 4.5rem;
-		width: 48px;
-		z-index: 1000;
-		display: none;
-	}
+    /* Critical CSS for above-the-fold layout and .loop button */
+    .loop {
+        align-items: center;
+        background-color: #464646;
+        border: none;
+        border-radius: 50%;
+        color: var(--white);
+        cursor: pointer;
+        display: flex;
+        font-size: 2.1rem;
+        height: 48px;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        position: fixed;
+        right: 3rem;
+        top: 4.5rem;
+        width: 48px;
+        z-index: 1000;
+        display: none;
+    }
 
-	.loop svg {
-		width: 48px;
-		height: 48px;
-		display: inline-block;
-	}
-	.overlay {
-		background-image: var(--overlay);
-		background-position: top left;
-		background-repeat: repeat;
-		background-size: 200px auto;
-		filter: brightness(0.5);
-		height: 100%;
-		inset-inline-start: 0;
-		pointer-events: none;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 9999;
-	}
+    .loop svg {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+    }
+    .overlay {
+        background-image: var(--overlay);
+        background-position: top left;
+        background-repeat: repeat;
+        background-size: 200px auto;
+        filter: brightness(0.5);
+        height: 100%;
+        inset-inline-start: 0;
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+    }
 </style>
 
 <script defer define:vars={{ musicIconSvg, volumeXIconSvg }}>
-	window.addEventListener('DOMContentLoaded', function() {
-		const loop = document.getElementById('music-toggle');
-		if(loop){
-			loop.addEventListener('click', () => {
-				const audio = document.getElementById('piano-audio');
-				if(audio && audio instanceof HTMLAudioElement) {
-					if (audio.paused) {
-						// show muted icon when playing (behaviour preserved from previous implementation)
-						loop.innerHTML = volumeXIconSvg;
-						audio.play();
-					} else {
-						loop.innerHTML = musicIconSvg;
-						audio.pause();
-					}
-				}
-			});
-		}
+    window.addEventListener("DOMContentLoaded", function () {
+        const loop = document.getElementById("music-toggle");
+        if (loop) {
+            loop.addEventListener("click", () => {
+                const audio = document.getElementById("piano-audio");
+                if (audio && audio instanceof HTMLAudioElement) {
+                    if (audio.paused) {
+                        // show muted icon when playing (behaviour preserved from previous implementation)
+                        loop.innerHTML = volumeXIconSvg;
+                        audio.play();
+                    } else {
+                        loop.innerHTML = musicIconSvg;
+                        audio.pause();
+                    }
+                }
+            });
+        }
 
-		// Apply mobile class if device is mobile or screen is small - need to work on resize too
-		function checkMobile() {
-			if (window.innerWidth < 992) {
-				document.body.classList.add('is-mobile');
-			} else {
-				document.body.classList.remove('is-mobile');
-			}
-		}
+        // Apply mobile class if device is mobile or screen is small - need to work on resize too
+        function checkMobile() {
+            if (window.innerWidth < 992) {
+                document.body.classList.add("is-mobile");
+            } else {
+                document.body.classList.remove("is-mobile");
+            }
+        }
 
-		function positionHeader() {
-			const header = document.querySelector('header');
-			if (window.scrollY > 500) {
-				header.classList.add('scrolled');
-			} else {
-				header.classList.remove('scrolled');
-			}
-		}
+        function positionHeader() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 500) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        }
 
-		window.addEventListener('resize', checkMobile);
-		window.addEventListener('scroll', positionHeader);
-		checkMobile();
-	});
+        window.addEventListener("resize", checkMobile);
+        window.addEventListener("scroll", positionHeader);
+        checkMobile();
+    });
 </script>
