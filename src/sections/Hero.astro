@@ -3,6 +3,14 @@
 ---
 
 <section class="section section--hero">
+    <!-- Preload hero image for LCP optimization -->
+    <link
+        rel="preload"
+        as="image"
+        href="/images/hero.webp"
+        imagesrcset="/images/hero.webp 1920w"
+        imagesizes="100vw"
+    />
     <picture class="hero-bg">
         <source
             srcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
