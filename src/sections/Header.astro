@@ -1,19 +1,19 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../images/logo.webp';
-import Navigation from '../components/Navigation.astro';
+import { Image } from "astro:assets";
+import logo from "../images/logo.webp";
+import Navigation from "../components/Navigation.astro";
 ---
 
 <header class="header">
     <div class="inner-container header__inner">
         <div class="header__logo">
             <a href="/" title="Home">
-                <Image src={ logo } alt="Logo" height="60">
+                <Image src={logo} alt="Logo" height="60" />
             </a>
         </div>
         <div class="header__nav">
             <Navigation />
-            <button class="btn btn--cta">Contribute</button>
+            <a href="" class="btn btn--cta">Contribute</a>
         </div>
     </div>
 </header>
@@ -23,7 +23,7 @@ import Navigation from '../components/Navigation.astro';
         background-color: var(--black);
         box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.9);
         inset-inline-start: 50%;
-        padding-block: .75rem;
+        padding-block: 0.75rem;
         padding-inline: 1.5rem;
         position: fixed;
         top: 0;
@@ -46,7 +46,7 @@ import Navigation from '../components/Navigation.astro';
     .header__logo,
     .header__logo a {
         align-items: center;
-        display: flex; 
+        display: flex;
     }
 
     .header__nav {
@@ -57,7 +57,7 @@ import Navigation from '../components/Navigation.astro';
     :global(.is-mobile) {
         .btn--cta {
             order: -1;
-            margin-inline-end: .75rem;
+            margin-inline-end: 0.75rem;
         }
     }
 
