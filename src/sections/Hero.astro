@@ -4,15 +4,26 @@
 
 <section class="section section--hero">
     <!-- Preload hero image for LCP optimization -->
-    <link rel="preload" as="image" href="/images/hero.webp" imagesrcset="/images/hero.webp 1920w, /images/hero.jpg 1280w" imagesizes="100vw" />
+    <link
+        rel="preload"
+        as="image"
+        href="/images/hero.webp"
+        imagesrcset="/images/hero.webp 1920w"
+        imagesizes="100vw"
+    />
     <picture class="hero-bg">
-        <source srcset="/images/hero.webp 1920w, /images/hero.webp 1280w" type="image/webp" sizes="100vw" />
+        <source
+            srcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
+            type="image/webp"
+            sizes="100vw"
+        />
         <img
             src="/images/hero.webp"
             srcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
             sizes="100vw"
             alt="Hero"
-            width="1920" height="1080"
+            width="1920"
+            height="1080"
             fetchpriority="high"
             decoding="async"
             loading="eager"
@@ -21,8 +32,11 @@
     </picture>
 
     <div class="inner-container">
-    <h1 class="hero__title">From St. James to Santiago</h1>
-    <h2 class="hero__subTitle">What happens when you turn a personal challenge into a project to also give something back?</h2>
+        <h1 class="hero__title">From St. James to Santiago</h1>
+        <h2 class="hero__subTitle">
+            What happens when you turn a personal challenge into a project to
+            also give something back?
+        </h2>
     </div>
     <div class="hero__overlay"></div>
 </section>
@@ -69,14 +83,18 @@
         line-height: 1.4;
         margin-block-end: 4.5rem;
         margin-inline: auto;
-        opacity: .85;
+        opacity: 0.85;
         text-align: center;
         text-transform: unset;
         width: 90%;
     }
 
     .hero__overlay {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgb(0, 0, 0) 99%);
+        background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 55%,
+            rgb(0, 0, 0) 99%
+        );
         flex: none;
         inset: 0;
         overflow: hidden;
@@ -84,7 +102,6 @@
     }
 
     @media all and (min-width: 768px) {
-
     }
 
     @media all and (min-width: 992px) {
@@ -99,5 +116,4 @@
             width: 60%;
         }
     }
-    
 </style>
