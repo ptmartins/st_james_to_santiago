@@ -1,5 +1,5 @@
 ---
-
+import { gsap } from "gsap";
 ---
 
 <section class="section section--hero">
@@ -32,8 +32,8 @@
     </picture>
 
     <div class="inner-container">
-        <h1 class="hero__title">From St. James to Santiago</h1>
-        <h2 class="hero__subTitle">
+        <h1 id="title" class="hero__title">From St. James to Santiago</h1>
+        <h2 id="subTititle" class="hero__subTitle">
             What happens when you turn a personal challenge into a project to
             also give something back?
         </h2>
@@ -117,3 +117,26 @@
         }
     }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import SplitType from 'split-type'
+
+    const title = new SplitType('#title', { types: 'words' });
+    const subTitle = new SplitType('#subTititle', { types: 'words' });
+
+    const timeline = gsap.timeline({ defaults: { ease: "power2.out" } });
+    timeline
+        .from(title.words, {
+            y: -50,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 1,
+        })
+        .from(subTitle.words, {
+            opacity: 0,
+            stagger: 0.1,
+            duration: 1,
+        }, "-=1");
+
+</script>
