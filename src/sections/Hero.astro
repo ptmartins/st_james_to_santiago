@@ -1,5 +1,6 @@
 ---
 import { gsap } from "gsap";
+import overlay from "@/images/fuzz.avif";
 ---
 
 <section class="section section--hero">
@@ -38,6 +39,7 @@ import { gsap } from "gsap";
             also give something back?
         </h2>
     </div>
+    <div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
     <div class="hero__overlay"></div>
 </section>
 
@@ -46,6 +48,7 @@ import { gsap } from "gsap";
         margin-block: 0;
         min-height: 100vh;
         padding: 0;
+        position: relative;
 
         .inner-container {
             inset-block-start: 50%;
@@ -70,7 +73,7 @@ import { gsap } from "gsap";
 
     .hero__title {
         font-size: 2.3rem;
-        letter-spacing: -2px;
+        letter-spacing: -1px;
         margin-block-end: 6rem;
         margin-inline: auto;
         text-align: center;
@@ -83,7 +86,6 @@ import { gsap } from "gsap";
         line-height: 1.4;
         margin-block-end: 4.5rem;
         margin-inline: auto;
-        opacity: 0.85;
         text-align: center;
         text-transform: unset;
         width: 90%;
@@ -92,21 +94,41 @@ import { gsap } from "gsap";
     .hero__overlay {
         background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0) 55%,
-            rgb(0, 0, 0) 99%
+            rgba(10, 10, 10, 0) 40%,
+            rgb(24, 24, 24) 98%
         );
         flex: none;
         inset: 0;
         overflow: hidden;
         position: absolute;
+        z-index: 200;
+    }
+
+    .overlay {
+        background-image: var(--overlay);
+        background-position: top left;
+        background-repeat: repeat;
+        background-size: 200px auto;
+        filter: brightness(0.5);
+        height: 100%;
+        inset-inline-start: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 100;
     }
 
     @media all and (min-width: 768px) {
+        .hero__title {
+            font-size: 3.5rem;
+        }
     }
 
     @media all and (min-width: 992px) {
         .hero__title {
             font-size: 4.8rem;
+            letter-spacing: -2px;
         }
     }
 

@@ -11,14 +11,14 @@ html { font-family: "Geist", sans-serif; font-display: swap; }
   --accent-pale-yellow: #f4f9c2;
   --accent-purple: #9191fb;
   --accent-green: #62d598;
-  --bg-color: #000;
+  --bg-color: #181818;
   --font-color: var(--white);
   --inner-container-width: 1440px;
   --border-radius: 6px;
 
   --glass: rgba(0, 0, 0, 0.4);
 
-  --default-transition: all .3s ease-in;
+  --default-transition: all .2s ease-in;
 }
 
 * {
@@ -78,6 +78,7 @@ h6 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: -1px;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
@@ -110,15 +111,15 @@ button,
 }
 
 .section {
-  margin-block: 3rem;
-  padding: 1.5rem;
+  padding: 3rem 1.5rem;
 }
+
 .section:first-child:not(.section--hero) {
   margin-block-start: 9rem;
 }
 
 .section:last-child {
-  background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);
+  color: var(--bg-color);
   margin-block-end: 0;
   padding-block-end: 12rem;
   min-height: 100vh;
@@ -156,8 +157,7 @@ button,
 @media all and (min-width: 1440px) {
 
   .section {
-    margin-block: 18rem;
-    padding: 0; 
+    padding: 18rem 0;
   }
 
   .section__title {

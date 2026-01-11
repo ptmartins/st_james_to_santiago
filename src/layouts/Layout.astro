@@ -92,7 +92,6 @@ const volumeXIconSvg = VolumeX;
             <slot />
         </main>
         <Footer />
-        <div class="overlay" style={`--overlay: url(${overlay.src});`}></div>
     </body>
 </html>
 
@@ -122,20 +121,6 @@ const volumeXIconSvg = VolumeX;
         width: 48px;
         height: 48px;
         display: inline-block;
-    }
-    .overlay {
-        background-image: var(--overlay);
-        background-position: top left;
-        background-repeat: repeat;
-        background-size: 200px auto;
-        filter: brightness(0.5);
-        height: 100%;
-        inset-inline-start: 0;
-        pointer-events: none;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 9999;
     }
 </style>
 
