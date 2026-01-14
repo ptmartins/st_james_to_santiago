@@ -119,7 +119,6 @@ button,
 }
 
 .section:last-child {
-  color: var(--bg-color);
   margin-block-end: 0;
   padding-block-end: 12rem;
   min-height: 100vh;

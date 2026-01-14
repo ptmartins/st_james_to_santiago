@@ -9,22 +9,21 @@ const CONTENTFUL_SPACE_ID = import.meta.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = import.meta.env.CONTENTFUL_ACCESS_TOKEN;
 
 // Fetch blog posts from Contentful
-const response = await fetch(`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`);
+const response = await fetch(
+    `https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`
+);
 const data = await response.json();
-
 
 const assets = {};
 if (data.includes?.Asset) {
-    data.includes.Asset.forEach(asset => {
+    data.includes.Asset.forEach((asset) => {
         assets[asset.sys.id] = asset;
     });
 }
 
-
 // Process the posts data
-const posts = data.items.map(item => {
-
-    let mediaUrl = '';
+const posts = data.items.map((item) => {
+    let mediaUrl = "";
     if (item.fields.media?.sys?.id) {
         const asset = assets[item.fields.media.sys.id];
         if (asset?.fields?.file?.url) {
@@ -39,43 +38,54 @@ const posts = data.items.map(item => {
         excerpt: item.fields.excerpt,
         content: item.fields.post.content[0].content[0].value,
         publishedDate: item.fields.date,
-        media: mediaUrl
-    }
+        media: mediaUrl,
+    };
 });
 ---
 
 <Layout title="Blog">
     <section class="section section--blog">
         <div class="inner-container">
-            <h1 class="section__title">Blog        <button id="subscribe">subscribe</button>    <!--  <Subscription /> --> </h1>
+            <h1 class="section__title">
+                Blog <button id="subscribe">subscribe</button>
+                <!--  <Subscription /> -->
+            </h1>
 
-            
             <div class="blog-posts">
-                {posts.map(post => (
-                    <article class="blog-post">
-                        <a href={`/blog/${post.slug}`} class="blog-post__link">
-                            {post.media && (
-                                <img 
-                                    src={post.media} 
-                                    alt={post.title}
-                                    class="blog-post__image"
-                                />
-                            )}
-                            <div class="blog-post__content">
-                                <h2 class="blog-post__title">{post.title}</h2>
-                                {post.excerpt && (
-                                    <p class="blog-post__excerpt">{post.excerpt}</p>
+                {
+                    posts.map((post) => (
+                        <article class="blog-post">
+                            <a
+                                href={`/blog/${post.slug}`}
+                                class="blog-post__link"
+                            >
+                                {post.media && (
+                                    <img
+                                        src={post.media}
+                                        alt={post.title}
+                                        class="blog-post__image"
+                                    />
                                 )}
-                                <time class="blog-post__date">
-                                    {new Date(post.publishedDate).toLocaleDateString()}
-                                </time>
-                            </div>
-                        </a>
-                    </article>
-                ))}
+                                <div class="blog-post__content">
+                                    <h2 class="blog-post__title">
+                                        {post.title}
+                                    </h2>
+                                    {post.excerpt && (
+                                        <p class="blog-post__excerpt">
+                                            {post.excerpt}
+                                        </p>
+                                    )}
+                                    <time class="blog-post__date">
+                                        {new Date(
+                                            post.publishedDate
+                                        ).toLocaleDateString()}
+                                    </time>
+                                </div>
+                            </a>
+                        </article>
+                    ))
+                }
             </div>
         </div>
     </section>
 </Layout>
-
-

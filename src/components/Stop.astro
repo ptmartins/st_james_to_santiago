@@ -34,15 +34,16 @@ const { data } = Astro.props;
             border: 3px solid var(--accent);
             border-radius: 50%;
             content: '';
-            height: 14px;
+            height: 20px;
             inset-block-start: 10px;
-            inset-inline-start: calc(100px - 7px);
+            inset-inline-start: calc(100px - 10px);
             position: absolute;
-            width: 14px;
+            width: 20px;
+            z-index: 10;
         }
 
         &::after {
-            background-color: var(--white);
+            background-color: rgba(255, 255, 255, .15);
             content: '';
             height: calc(100% - 18px);
             inset-block-start: 28px;
@@ -81,18 +82,20 @@ const { data } = Astro.props;
 
         p {
             font-size: 1.1rem;
-            opacity: .65;
+            opacity: .85;
         }
     }
 
     .ferry {
+        height: 48px;
         inset-block-start: 0;
         position: absolute;
+        width: 48px;
     }
 
-    .ferry svg {
-        width: 3.4rem;
-        height: 3.4rem;
+    :global(.lucide.lucide-ship) {
+        width: 48px !important;
+        height: 48px !important;
         display: inline-block;
         margin-block-end: 3rem;
     }

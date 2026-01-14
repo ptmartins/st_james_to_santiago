@@ -1,10 +1,14 @@
 ---
-import Stat from '../components/Stat.astro';
+import Stat from "../components/Stat.astro";
 ---
 
 <section class="section section--stats">
     <div class="inner-container">
-        <h2 class="section__title section__title--stats">The project in numbers <span class="title__estimated">(estimated)</span></h2>
+        <h2 class="section__title section__title--stats">
+            The project in numbers <span class="title__estimated"
+                >(estimated)</span
+            >
+        </h2>
         <div class="stats">
             <Stat title="Total distance" icon="route" value="686 km" />
             <Stat title="Days" icon="calendar_clock" value="15 days" />
@@ -19,7 +23,7 @@ import Stat from '../components/Stat.astro';
 <style>
     .section--stats {
         align-items: center;
-        background-color: #f9d368; /*#f4b400;*/
+        background-color: var(--yellow);
         display: flex;
         min-height: unset;
 
@@ -34,10 +38,10 @@ import Stat from '../components/Stat.astro';
 
     .stats {
         display: grid;
-        gap: 3rem;   
+        gap: 3rem;
         grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
         justify-items: center;
-    }   
+    }
 
     .stats > * {
         justify-self: start;
@@ -49,6 +53,6 @@ import Stat from '../components/Stat.astro';
         letter-spacing: normal;
         margin-left: 0.5rem;
         text-transform: initial;
-        opacity: .65;
+        opacity: 0.65;
     }
 </style>

@@ -45,6 +45,7 @@ import overlay from "@/images/fuzz.avif";
 
 <style>
     .section--hero {
+        color: var(--white);
         margin-block: 0;
         min-height: 100vh;
         padding: 0;
@@ -142,10 +143,10 @@ import overlay from "@/images/fuzz.avif";
 
 <script>
     import { gsap } from "gsap";
-    import SplitType from 'split-type'
+    import SplitType from "split-type";
 
-    const title = new SplitType('#title', { types: 'words' });
-    const subTitle = new SplitType('#subTititle', { types: 'words' });
+    const title = new SplitType("#title", { types: "words" });
+    const subTitle = new SplitType("#subTititle", { types: "words" });
 
     const timeline = gsap.timeline({ defaults: { ease: "power2.out" } });
     timeline
@@ -155,10 +156,13 @@ import overlay from "@/images/fuzz.avif";
             stagger: 0.1,
             duration: 1,
         })
-        .from(subTitle.words, {
-            opacity: 0,
-            stagger: 0.1,
-            duration: 1,
-        }, "-=1");
-
+        .from(
+            subTitle.words,
+            {
+                opacity: 0,
+                stagger: 0.1,
+                duration: 1,
+            },
+            "-=1"
+        );
 </script>
