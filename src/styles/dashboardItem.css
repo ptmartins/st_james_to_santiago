@@ -59,9 +59,7 @@
 
 
 @media all and (min-width: 480px) {
-    .dashboardItem {
-        width: calc(50% - .75rem);
-    }
+
 }
 
 

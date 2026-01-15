@@ -13,7 +13,7 @@ import Navigation from "../components/Navigation.astro";
         </div>
         <div class="header__nav">
             <Navigation />
-            <a href="" class="btn btn--cta">Contribute</a>
+            <a href="#donate" class="btn btn--cta">Contribute</a>
         </div>
     </div>
 </header>
@@ -21,6 +21,7 @@ import Navigation from "../components/Navigation.astro";
 <style>
     .header {
         background-color: var(--bg-color);
+        border-radius: 12px;
         box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.9);
         inset-inline-start: 50%;
         padding-block: 0.75rem;
@@ -34,6 +35,7 @@ import Navigation from "../components/Navigation.astro";
     }
 
     .header.scrolled {
+        border-radius: 0;
         top: 0;
         width: 100%;
     }

@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ActivityList from '../components/ActivityList.astro';
-import DashboardItem from '../components/DashboardItem.astro';
-import TrainingChart from '../components/TrainingChart.astro';
-import '../styles/training.css';  
+import Layout from "../layouts/Layout.astro";
+import ActivityList from "../components/ActivityList.astro";
+import DashboardItem from "../components/DashboardItem.astro";
+import TrainingChart from "../components/TrainingChart.astro";
+import "../styles/training.css";
 
 let activities = [];
 let totalSessions = 0;
@@ -13,33 +13,33 @@ let totalDurationFormatted;
 let speed = 0;
 let avgSpeed = 0;
 
-const apiUrl =
-  import.meta.env.PUBLIC_SITE_URL
+const apiUrl = import.meta.env.PUBLIC_SITE_URL
     ? `${import.meta.env.PUBLIC_SITE_URL}/api/strava`
-    : 'http://localhost:4321/api/strava';
+    : "http://localhost:4321/api/strava";
 
-    console.log(apiUrl);
+console.log(apiUrl);
 
 try {
-  const res = await fetch(apiUrl);
-  activities = await res.json();
-  console.log(activities);
+    const res = await fetch(apiUrl);
+    activities = await res.json();
+    console.log(activities);
 
-
-  activities.forEach(activity => {
-    totalSessions++;
-    totalDistance = totalDistance + parseFloat((activity.distance / 1000).toFixed(1));
-    totalDuration = totalDuration + activity.elapsed_time;
-    totalDurationFormatted = new Date(totalDuration* 1000).toISOString().substr(11, 8);
-    speed = speed + activity.average_speed;
-  });
-
+    activities.forEach((activity) => {
+        totalSessions++;
+        totalDistance =
+            totalDistance + parseFloat((activity.distance / 1000).toFixed(1));
+        totalDuration = totalDuration + activity.elapsed_time;
+        totalDurationFormatted = new Date(totalDuration * 1000)
+            .toISOString()
+            .substr(11, 8);
+        speed = speed + activity.average_speed;
+    });
 } catch (err) {
-  console.log('Strava fetch error:', err);
-  activities = [];
+    console.log("Strava fetch error:", err);
+    activities = [];
 }
 
-  avgSpeed = parseFloat((speed / totalSessions).toFixed(1));
+avgSpeed = parseFloat((speed / totalSessions).toFixed(1));
 ---
 
 <Layout title="Training">
@@ -47,34 +47,35 @@ try {
         <div class="inner-container">
             <h1 class="section__title">Training</h1>
 
-                <!-- Dashboard -->
-                <div class="training__dashboard">
-                  <TrainingChart data={ activities } />
-                  <div class="dashboardStats">
-                    <DashboardItem type="sessions" data={ totalSessions } />
-                    <DashboardItem type="distance" data={ totalDistance } />
-                    <DashboardItem type="duration" data={ totalDurationFormatted } />
-                    <DashboardItem type="speed" data={ avgSpeed } />
-                  </div>
-                </div>
+            <!-- Dashboard -->
+            <div class="training__dashboard">
+                <!-- <div class="dashboardStats"> -->
+                <DashboardItem type="sessions" data={totalSessions} />
+                <DashboardItem type="distance" data={totalDistance} />
+                <DashboardItem type="duration" data={totalDurationFormatted} />
+                <DashboardItem type="speed" data={avgSpeed} />
+                <!-- </div> -->
+            </div>
 
-                <!-- Sessions -->
-                <div class="training__sessions">
-                  <h2>Sessions</h2>
-                  <div class="sessions__header">
+            <!-- Sessions -->
+            <div class="training__sessions">
+                <h2>Sessions</h2>
+                <div class="sessions__header">
                     <span>Duration</span>
                     <span>Distance (km)</span>
                     <span>Avg. speed</span>
                     <span>Alt. gain</span>
                     <span>Calories</span>
                     <span>Date/Time</span>
-                  </div>
-                  { activities.length > 0 ? (
-                      <ActivityList activities={ activities } />
-                      ) : (
-                      <p>No activities found.</p>
-                  )}
                 </div>
+                {
+                    activities.length > 0 ? (
+                        <ActivityList activities={activities} />
+                    ) : (
+                        <p>No activities found.</p>
+                    )
+                }
+            </div>
         </div>
     </section>
 </Layout>

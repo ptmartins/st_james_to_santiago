@@ -1,0 +1,76 @@
+---
+import crUK from "../images/logos/cr_uk_logo.png";
+import act from "../images/logos/act_logo.webp";
+import { Image } from "astro:assets";
+import "../styles/donate.css";
+---
+
+<section id="donate" class="section section--donate">
+    <div class="inner-container">
+        <h2 class="section__title">Donate</h2>
+        <div class="donate__text">
+            <p>Your donation saves lives.</p>
+
+            <p class="fade">
+                When you support <strong>Cancer Research UK</strong>, you're
+                funding the scientists and clinical trials bringing breakthrough
+                treatments closer to reality. Survival rates have doubled in
+                four decades, but with 1 in 2 people facing a cancer diagnosis,
+                there's urgent work ahead. Just £24 funds an hour of vital
+                research. £100 supports a researcher for half a day,
+                accelerating discoveries that could save thousands of lives.
+            </p>
+
+            <p class="fade">
+                <strong>Addenbrooke's Charitable Trust</strong> transforms care for
+                patients and families today. Your gift funds the crucial extras the
+                NHS can't provide—pioneering diagnostic equipment that detects cancer
+                earlier, comfort rooms where families receive difficult news with
+                dignity, and specialist support services that help patients cope and
+                maintain hope through treatment. These aren't luxuries; they're lifelines.
+            </p>
+
+            <p class="fade">
+                Cancer doesn't discriminate, and neither should access to
+                world-class research and compassionate care. Whether cancer has
+                touched your life or you want better outcomes for those it will
+                affect, your donation creates immediate impact. Research finds
+                tomorrow's cures. Enhanced care improves today's patient
+                experience. Both give families precious time together.
+            </p>
+
+            <p class="fade">
+                <strong>Choose your impact:</strong> Support Cancer Research UK for
+                breakthrough research, Addenbrooke's Charitable Trust for enhanced
+                patient care, or split your gift between both. Every penny fights
+                cancer. Make your donation below.
+            </p>
+        </div>
+        <div class="donate">
+            <a
+                href="https://www.cancerresearchuk.org/"
+                target="_blank"
+                rel="noopener"
+                class="beneficiary glass"
+            >
+                <Image
+                    src={crUK}
+                    alt="Cancer Research UK"
+                    class="beneficiary__logo"
+                />
+            </a>
+            <a
+                href="https://act4addenbrookes.org.uk/"
+                target="_blank"
+                rel="noopener"
+                class="beneficiary glass"
+            >
+                <Image
+                    src={act}
+                    alt="Addenbrooke's Charitable Trust"
+                    class="beneficiary__logo"
+                />
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,25 +1,35 @@
-.section--beneficiaries {
+.section--donate {
     height: auto;
+    position: relative;
 }
 
-.section.section--beneficiaries {
+.section.section--donate {
     min-height: unset;
 }
 
-.beneficiaries {
+.donate {
+    align-items: center;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 6rem;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    padding: .75rem;
+    transition: var(--default-transition);
 
     a {
+        border-radius: var(--border-radius);
+        display: grid;
+        height: 100%;
+        place-items: center;
         text-align: center;
     }
+
     img {
         filter: grayscale(100%) brightness(100);
         height: auto;
         object-fit: cover;
+        padding: 1.5rem;
         transition: var(--default-transition);
-        width: 70%;
+        width: 85%;
 
         &:hover {
             filter: none;
@@ -27,11 +37,15 @@
     }
 }
 
+.donate__text {
+    margin-block-end: 9rem;
+}
+
 @media all and (min-width: 768px) {
 }
 
 @media all and (min-width: 992px) {
-    .beneficiaries {
+    .donate {
         
         img {
             width: 85%;
@@ -40,7 +54,7 @@
 }
 
 @media all and (min-width: 1440px) {
-    .beneficiaries {
+    .donate {
         img {
             width: 100%;
         }
