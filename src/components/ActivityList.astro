@@ -1,27 +1,29 @@
 ---
-import Activity from '../components/Activity.astro';
+import Activity from "../components/Activity.astro";
 const { activities } = Astro.props;
 ---
 
 <ul class="activities">
-  { activities.map(activity => (
-    <Activity data={ activity } key={ activity.id } />
-  ))}
+    {
+        activities.map((activity) => (
+            <Activity data={activity} key={activity.id} />
+        ))
+    }
 </ul>
 
 <style>
     .activities {
-      max-height: 50vh
-      overflow-y: auto;
+        max-height: 50vh;
+        overflow-y: auto;
     }
 
     .activities::-webkit-scrollbar {
-      background-color: var(--glass);
-      width: 14px;
+        background-color: var(--glass);
+        width: 14px;
     }
 
     .activities::-webkit-scrollbar-thumb {
-      background-color: var(--accent);
-      border-radius: 12px;
+        background-color: var(--accent);
+        border-radius: 12px;
     }
 </style>

@@ -2,11 +2,10 @@ h2 {
     margin-block-end: 3rem;
 }
 .section--training {
-    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(62, 62, 62) 100%);
     height: 100%;
-    margin-block-end: 0;
+    margin-block: 0;
     min-height: 100vh;
-    padding-block-end: 9rem;
+    padding-block: 4.5rem 9rem;
 }
 
 .training__dashboard {

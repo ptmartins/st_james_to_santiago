@@ -1,7 +1,11 @@
- .section--blog .section__title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+ .section--blog {
+    padding-block-start: 4.5rem;
+
+    .section__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .blog-posts {

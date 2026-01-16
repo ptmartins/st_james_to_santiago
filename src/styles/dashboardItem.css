@@ -1,12 +1,12 @@
 .dashboardItem {
-    background-color: var(--glass);
-    border: 1px solid #222;
+    border: 1px solid #181818;
     border-radius: var(--border-radius);
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, .95);
     color: var(--white);
     display: flex;
     font-size: 16px;
     font-weight: 400;
+    height: 200px;
     justify-content: space-between;
     padding: 1.5rem;
     position: relative;
@@ -49,12 +49,17 @@
     border-radius: 6px;
     color: var(--black);
     display: grid;
-    font-size: 42px;
-    height: 48px;
+    font-size: 56px;
+    height: 56px;
     inset-inline-end: 1.5rem;
     place-items: center;
     position: absolute;
-    width: 48px;
+    width: 56px;
+
+    svg {
+        height: 32px;
+        width: 32px;
+    }
 }
 
 

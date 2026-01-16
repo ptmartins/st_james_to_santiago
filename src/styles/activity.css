@@ -1,12 +1,11 @@
 .activity {
-    background-color: var(--glass);
     border: 1px solid #222;
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .95);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .95);
     color: var(--white);
     font-size: 14px;
     font-weight: 400;
-    margin-block-end: 1.5rem;
+    margin-block-end: 2rem;
     padding: 1rem 1.5rem;
     position: relative;
 }
@@ -86,9 +85,14 @@
 }
 
 .data {
+    align-items: baseline;
     display: flex;
     gap: .75rem;
     justify-content: start;
+}
+
+.unit {
+    opacity: .85;
 }
 
 .data__health {

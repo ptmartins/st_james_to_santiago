@@ -1,17 +1,17 @@
 ---
 import calcCalories from "../utils/calcCalories";
 import "../styles/activity.css";
-import { Bike, PersonStanding } from 'lucide-static';
+import { Bike, PersonStanding } from "lucide-static";
 
-const { data } = Astro.props; 
-const date = new Date(data.start_date).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
+const { data } = Astro.props;
+const date = new Date(data.start_date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
 });
-const time = new Date(data.start_date).toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit'
+const time = new Date(data.start_date).toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
 });
 
 const duration = new Date(data.elapsed_time * 1000).toISOString().substr(11, 8);
@@ -19,46 +19,60 @@ const durationHours = Number(data.elapsed_time / 3600).toFixed(3);
 const calories = calcCalories(90, data.average_speed, durationHours);
 ---
 
-<div class="activity">
+<div class="activity glass">
     <div class="activity__content">
-        {/* use Lucide icons: bicycle for Ride, running (or activity) for Run */}
         {
-            data.sport_type === 'Ride' ? 
-            <span class="activity__sport-type" title="Cycle"><Fragment set:html={Bike} /></span> : 
-            <span class="activity__sport-type" title="Run"><Fragment set:html={PersonStanding} /></span>
+            /* use Lucide icons: bicycle for Ride, running (or activity) for Run */
+        }
+        {
+            data.sport_type === "Ride" ? (
+                <span class="activity__sport-type" title="Cycle">
+                    <Fragment set:html={Bike} />
+                </span>
+            ) : (
+                <span class="activity__sport-type" title="Run">
+                    <Fragment set:html={PersonStanding} />
+                </span>
+            )
         }
         <div class="activity__dateTime">
-            <div class="activity__date">{ date }</div> 
-            <div class="activity__time">{ time }</div>
+            <div class="activity__date">{date}</div>
+            <div class="activity__time">{time}</div>
         </div>
 
         <div class="activity__data activity__data--duration">
-            <span class="activity__value">{ duration } </span>    
+            <span class="activity__value">{duration} </span>
         </div>
-        <div class="activity__data activity__data--distance"> 
-            <span class="activity__value">{ Number(data.distance / 1000).toFixed(3) } Km</span>    
+        <div class="activity__data activity__data--distance">
+            <span class="activity__value"
+                >{Number(data.distance / 1000).toFixed(3)} Km</span
+            >
         </div>
-        <div class="activity__data activity__data--avg-speed"> 
-            <span class="activity__value">{ data.avg_speed } km/h </span>
+        <div class="activity__data activity__data--avg-speed">
+            <span class="activity__value">{data.avg_speed} km/h </span>
         </div>
-        <div class="activity__data activity__data--elevation-gain"> 
-            <span class="activity__value">{ data.total_elevation_gain } m</span>
+        <div class="activity__data activity__data--elevation-gain">
+            <span class="activity__value">{data.total_elevation_gain} m</span>
         </div>
 
         <div class="activity__data activity__data--calories">
-            <span class="activity__value">{ calories} cal</span>
+            <span class="activity__value">{calories} cal</span>
         </div>
 
-            <a href={`https://www.strava.com/activities/${data.id}`} target="_blank" class="activity__link"> See on Strava</a>
-
+        <a
+            href={`https://www.strava.com/activities/${data.id}`}
+            target="_blank"
+            class="activity__link"
+        >
+            See on Strava</a
+        >
     </div>
 </div>
 
-    <style>
-        .activity__sport-type svg {
-            width: 2.2rem;
-            height: 2.2rem;
-            vertical-align: middle;
-        }
-    </style>
-
+<style>
+    .activity__sport-type svg {
+        width: 2.2rem;
+        height: 2.2rem;
+        vertical-align: middle;
+    }
+</style>
