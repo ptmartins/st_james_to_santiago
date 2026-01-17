@@ -145,9 +145,6 @@ button,
   border: 1px solid #181818;
 }
 
-.fade {
-  opacity: .88;
-}
 
 @media all and (min-width: 768px) {
   body {

@@ -1,4 +1,6 @@
 .section--donate {
+    background-color: #ffedbe;
+    color: #181818;
     height: auto;
     position: relative;
 }
@@ -24,12 +26,12 @@
     }
 
     img {
-        filter: grayscale(100%) brightness(100);
+        filter: grayscale(100%) brightness(0);
         height: auto;
         object-fit: cover;
         padding: 1.5rem;
         transition: var(--default-transition);
-        width: 85%;
+        width: 95%;
 
         &:hover {
             filter: none;
