@@ -156,41 +156,44 @@
     }
 </style>
 
-<script is:inline>
-    function handleTickInit(tick) {
-        // get timer offset (if not found, set to today)
+<script>
+    import Tick from "@pqina/flip";
+
+    // Make Tick available globally
+    window.Tick = Tick;
+
+    // Define the init handler
+    window.handleTickInit = function (tick) {
         var offset = new Date(
             localStorage.getItem("countdown-offset") || new Date()
         );
 
-        // store the offset (not really necessary but saves some if statements)
         localStorage.setItem("countdown-offset", offset);
 
-        // time in hours the timer will run down
         var timeDuration = Tick.helper.duration(1, "days");
 
-        // add 24 hours to get final deadline
         var deadline = new Date("2027-06-10T00:00:00Z");
 
-        // create counter
         var counter = Tick.count.down(deadline, {
             format: ["d", "h", "m", "s"],
         });
 
-        // update tick with the counter value
         counter.onupdate = function (value) {
             tick.value = value;
         };
 
         counter.onended = function () {
-            // redirect, uncomment the next line
             // window.location = 'my-location.html'
-            // hide counter, uncomment the next line
             // tick.root.style.display = 'none';
-            // show message, uncomment the next line
             // document.querySelector('.tick-onended-message').style.display = '';
         };
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+            Tick.DOM.parse(document.body);
+        });
+    } else {
+        Tick.DOM.parse(document.body);
     }
 </script>
-
-<script is:inline src="/js/flip.min.js" defer></script>
