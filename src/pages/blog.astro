@@ -22,7 +22,7 @@ if (data.includes?.Asset) {
 }
 
 // Process the posts data
-const posts = data.items.map((item) => {
+let posts = data.items.map((item) => {
     let mediaUrl = "";
     if (item.fields.media?.sys?.id) {
         const asset = assets[item.fields.media.sys.id];
@@ -41,6 +41,8 @@ const posts = data.items.map((item) => {
         media: mediaUrl,
     };
 });
+
+posts = [];
 ---
 
 <Layout title="Blog">
@@ -53,37 +55,45 @@ const posts = data.items.map((item) => {
 
             <div class="blog-posts">
                 {
-                    posts.map((post) => (
-                        <article class="blog-post">
-                            <a
-                                href={`/blog/${post.slug}`}
-                                class="blog-post__link"
-                            >
-                                {post.media && (
-                                    <img
-                                        src={post.media}
-                                        alt={post.title}
-                                        class="blog-post__image"
-                                    />
-                                )}
-                                <div class="blog-post__content">
-                                    <h2 class="blog-post__title">
-                                        {post.title}
-                                    </h2>
-                                    {post.excerpt && (
-                                        <p class="blog-post__excerpt">
-                                            {post.excerpt}
-                                        </p>
+                    posts.length > 0 ? (
+                        posts.map((post) => (
+                            <article class="blog-post">
+                                <a
+                                    href={`/blog/${post.slug}`}
+                                    class="blog-post__link"
+                                >
+                                    {post.media && (
+                                        <img
+                                            src={post.media}
+                                            alt={post.title}
+                                            class="blog-post__image"
+                                        />
                                     )}
-                                    <time class="blog-post__date">
-                                        {new Date(
-                                            post.publishedDate
-                                        ).toLocaleDateString()}
-                                    </time>
-                                </div>
-                            </a>
-                        </article>
-                    ))
+                                    <div class="blog-post__content">
+                                        <h2 class="blog-post__title">
+                                            {post.title}
+                                        </h2>
+                                        {post.excerpt && (
+                                            <p class="blog-post__excerpt">
+                                                {post.excerpt}
+                                            </p>
+                                        )}
+                                        <time class="blog-post__date">
+                                            {new Date(
+                                                post.publishedDate
+                                            ).toLocaleDateString()}
+                                        </time>
+                                    </div>
+                                </a>
+                            </article>
+                        ))
+                    ) : (
+                        <h1 class="blog__no-posts">
+                            Starting March 20
+                            <sup style="text-transform: lowercase;">th</sup>,
+                            2027
+                        </h1>
+                    )
                 }
             </div>
         </div>

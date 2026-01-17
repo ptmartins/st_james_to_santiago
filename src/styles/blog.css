@@ -2,9 +2,12 @@
     padding-block-start: 4.5rem;
 
     .section__title {
+        align-items: flex-start;
         display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
         justify-content: space-between;
-        align-items: center;
+
     }
 }
 
@@ -26,6 +29,10 @@
     justify-content: space-between;
     position: relative;
     transition: all 0.3s ease;
+}
+
+.blog__no-posts {
+    grid-area: 1 / 1 / -1 / -1;
 }
 
 .blog-post:hover {
