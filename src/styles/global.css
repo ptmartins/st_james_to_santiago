@@ -98,6 +98,10 @@ button,
   background-color: var(--accent);
   color: var(--black);
   font-weight: 600;
+  
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .inner-container {

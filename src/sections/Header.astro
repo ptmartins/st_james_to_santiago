@@ -55,6 +55,10 @@ import Navigation from "../components/Navigation.astro";
     .header__nav {
         align-items: center;
         display: flex;
+
+        .btn--cta {
+            animation: pulse 2s ease infinite;
+        }
     }
 
     :global(.is-mobile) {
@@ -67,6 +71,18 @@ import Navigation from "../components/Navigation.astro";
     :global(:not(.is-mobile)) {
         .btn--cta {
             margin-inline-start: 2.5rem;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            scale: 1;
+        }
+        50% {
+            scale: 1.15;
+        }
+        100% {
+            scale: 1;
         }
     }
 
