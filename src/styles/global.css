@@ -235,4 +235,10 @@ button,
   .section__title {
     margin-block-end: var(--space-4xl);
   }
+
+  /* Larger paragraph text for intro and donate sections on desktop */
+  .section--intro p,
+  .section--donate p {
+    font-size: var(--font-size-lg);
+  }
 }
