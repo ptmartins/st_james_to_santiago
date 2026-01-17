@@ -1,5 +1,7 @@
 ---
 import { gsap } from "gsap";
+import { Image } from "astro:assets";
+import heroImage from "@/images/hero.webp"; // Move to src/images/
 import overlay from "@/images/fuzz.avif";
 ---
 
@@ -12,25 +14,18 @@ import overlay from "@/images/fuzz.avif";
         imagesrcset="/images/hero.webp 1920w"
         imagesizes="100vw"
     />
-    <picture class="hero-bg">
-        <source
-            srcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
-            type="image/webp"
-            sizes="100vw"
-        />
-        <img
-            src="/images/hero.webp"
-            srcset="/images/hero.webp 1920w, /images/hero.webp 1280w"
-            sizes="100vw"
-            alt="Hero"
-            width="1920"
-            height="1080"
-            fetchpriority="high"
-            decoding="async"
-            loading="eager"
-            style="aspect-ratio: 16/9; width: 100%; height: 100%; object-fit: cover; object-position: center;"
-        />
-    </picture>
+    <Image
+        class="hero-bg"
+        src={heroImage}
+        alt="Hero"
+        width={1920}
+        height={1080}
+        quality={80}
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+    />
 
     <div class="inner-container">
         <h1 id="title" class="hero__title">From St. James to Santiago</h1>
@@ -69,6 +64,8 @@ import overlay from "@/images/fuzz.avif";
         display: block;
         filter: brightness(0.5);
         height: 100vh;
+        object-fit: cover;
+        width: 100%;
 
         img {
             height: 100%;
