@@ -200,7 +200,6 @@ button,
   font-size: var(--font-size-3xl);
   font-weight: 900;
   margin-block-end: var(--space-3xl);
-  text-align: center;
   line-height: var(--line-height-tight);
 }
 
