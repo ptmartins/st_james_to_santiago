@@ -25,6 +25,7 @@ h2 {
 
 .sessions__header {
     display: grid;
+    font-weight: 700;
     gap: 1.5rem;
     grid-template-columns: 60px repeat(7, 1fr);
     grid-template-rows: minmax(30px, 1fr);

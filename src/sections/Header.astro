@@ -57,14 +57,19 @@ import Navigation from "../components/Navigation.astro";
         display: flex;
 
         .btn--cta {
-            animation: pulse 2s ease infinite;
+            box-shadow: 0 0 0 0 rgb(248, 162, 1);
+            animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+
+            &:hover {
+                animation: none;
+            }
         }
     }
 
     :global(.is-mobile) {
         .btn--cta {
             order: -1;
-            margin-inline-end: 0.75rem;
+            margin-inline-end: 1rem;
         }
     }
 
@@ -75,14 +80,14 @@ import Navigation from "../components/Navigation.astro";
     }
 
     @keyframes pulse {
-        0% {
-            scale: 1;
+        to {
+            box-shadow: 0 0 0 10px rgba(248, 162, 1, 0);
         }
-        50% {
-            scale: 1.15;
-        }
-        100% {
-            scale: 1;
+    }
+
+    @media all and (min-width: 480px) {
+        .header {
+            width: 90%;
         }
     }
 

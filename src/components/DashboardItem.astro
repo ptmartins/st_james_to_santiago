@@ -1,6 +1,6 @@
 ---
-import '../styles/dashboardItem.css';
-import { Calendar, MapPin, Clock, Zap } from 'lucide-static';
+import "../styles/dashboardItem.css";
+import { Calendar, MapPin, Clock, Zap } from "lucide-static";
 
 const { type, data } = Astro.props;
 let label;
@@ -8,54 +8,52 @@ let subLabel;
 let unit;
 let icon;
 
-switch(type.toLowerCase()) {
-    case 'sessions':
-        label = 'Sessions';
-        subLabel = 'All time sessions';
-            icon = 'calendar_month'
+switch (type.toLowerCase()) {
+    case "sessions":
+        label = "Sessions";
+        subLabel = "All time sessions";
+        icon = "calendar_month";
         break;
-    case 'distance':
-        label = 'Distance';
+    case "distance":
+        label = "Distance";
         subLabel = `Total Km's cycled`;
-        unit = 'Km';
-            icon = 'location_on';
+        unit = "Km";
+        icon = "location_on";
         break;
-    case 'duration':
-        label = 'Duration';
-        subLabel = 'Total training time';
-        icon = 'schedule';
+    case "duration":
+        label = "Duration";
+        subLabel = "Total training time";
+        icon = "schedule";
         break;
-    case 'speed':
-        label = 'Avg. Speed';
-        subLabel = 'Overall average speed';
-        unit= 'Km/h';
-        icon = 'speed';
+    case "speed":
+        label = "Avg. Speed";
+        subLabel = "Overall average speed";
+        unit = "Km/h";
+        icon = "speed";
         break;
 }
 
-    // Map material icon names to Lucide equivalents
-    const iconMap: Record<string, string> = {
-        'calendar_month': Calendar,
-        'location_on': MapPin,
-        'schedule': Clock,
-        'speed': Zap,
-    };
+// Map material icon names to Lucide equivalents
+const iconMap: Record<string, string> = {
+    calendar_month: Calendar,
+    location_on: MapPin,
+    schedule: Clock,
+    speed: Zap,
+};
 
-    const lucideIcon = icon ? iconMap[icon] ?? icon : '';
+const lucideIcon = icon ? (iconMap[icon] ?? icon) : "";
 ---
 
 <div class="dashboardItem glass">
     <div class="content">
-        <h3 class="label"> { label } </h3>
-        <h2 class="data"> { data } <span class="unit"> { unit } </span> </h2>
-        <p class="subLabel"> { subLabel } </p>
+        <h3 class="label">{label}</h3>
+        <h2 class="data">{data} <span class="unit"> {unit} </span></h2>
+        <p class="subLabel">{subLabel}</p>
     </div>
     <div class="icon">
         <Fragment set:html={lucideIcon} />
     </div>
-
 </div>
-
 
 <style>
     .icon svg {
@@ -64,4 +62,3 @@ switch(type.toLowerCase()) {
         display: inline-block;
     }
 </style>
-
