@@ -2,6 +2,7 @@
 import crUK from "../images/logos/cr_uk_logo.png";
 import act from "../images/logos/act_logo.webp";
 import { Image } from "astro:assets";
+import { HandCoins, ExternalLink } from "lucide-static";
 import "../styles/donate.css";
 ---
 
@@ -47,30 +48,49 @@ import "../styles/donate.css";
             </p>
         </div>
         <div class="donate">
-            <a
-                href="https://www.cancerresearchuk.org/"
-                target="_blank"
-                rel="noopener"
-                class="beneficiary"
-            >
+            <div class="beneficiary">
                 <Image
                     src={crUK}
                     alt="Cancer Research UK"
                     class="beneficiary__logo"
                 />
-            </a>
-            <a
-                href="https://act4addenbrookes.org.uk/"
-                target="_blank"
-                rel="noopener"
-                class="beneficiary"
-            >
+                <div class="beneficiary__actions">
+                    <a href="" class="beneficiary__donate">
+                        Donate <Fragment set:html={HandCoins} />
+                    </a>
+                    <a
+                        href="https://www.cancerresearchuk.org/"
+                        class="beneficiary__info"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Know more <Fragment set:html={ExternalLink} />
+                    </a>
+                </div>
+            </div>
+
+            <div class="beneficiary">
                 <Image
                     src={act}
                     alt="Addenbrooke's Charitable Trust"
                     class="beneficiary__logo"
                 />
-            </a>
+                <div class="beneficiary__actions">
+                    <a href="" class="beneficiary__donate">
+                        Donate <Fragment set:html={HandCoins} />
+                    </a>
+                    <a
+                        href="https://act4addenbrookes.org.uk/"
+                        target="_blank"
+                        rel="noopener"
+                        class="beneficiary__info"
+                    >
+                        Know more <Fragment set:html={ExternalLink} />
+                    </a>
+                </div>
+            </div>
+
+            <a> </a>
         </div>
     </div>
 </section>
