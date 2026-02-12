@@ -18,6 +18,7 @@ const duration = new Date(data.elapsed_time * 1000).toISOString().substr(11, 8);
 const durationHours = Number(data.elapsed_time / 3600).toFixed(3);
 const calories = calcCalories(90, data.average_speed, durationHours);
 const avgSpeed = Number((data.average_speed * 3.6).toFixed(1));
+---
 
 <div class="activity glass">
     <div class="activity__content">
