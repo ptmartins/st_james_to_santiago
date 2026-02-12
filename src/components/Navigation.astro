@@ -1,5 +1,5 @@
 ---
-import { Menu } from "lucide-static";
+import { Menu, X } from "lucide-static";
 
 const { pathname } = Astro.url;
 ---
@@ -25,7 +25,12 @@ const { pathname } = Astro.url;
 </nav>
 <div class="nav__mobile">
     <button id="navToggle" class="nav__toggle" aria-label="Toggle navigation">
-        <Fragment set:html={Menu} />
+        <span class="nav__toggle-icon nav__toggle-icon--burger">
+            <Fragment set:html={Menu} />
+        </span>
+        <span class="nav__toggle-icon nav__toggle-icon--close">
+            <Fragment set:html={X} />
+        </span>
     </button>
     <ul id="mobileMenu" class="mobile__menu">
         <li>
@@ -93,17 +98,52 @@ const { pathname } = Astro.url;
         }
 
         .nav__toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
             display: grid;
             height: 48px;
             padding: 0;
             place-items: center;
+            position: relative;
             width: 48px;
+            z-index: 1001;
         }
 
-        .nav__toggle svg {
+        .nav__toggle-icon {
+            display: grid;
+            place-items: center;
+            position: absolute;
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .nav__toggle-icon svg {
             width: 24px;
             height: 24px;
             display: inline-block;
+            stroke: var(--white);
+        }
+
+        .nav__toggle-icon--burger {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .nav__toggle-icon--close {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        .nav__toggle.active .nav__toggle-icon--burger {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        .nav__toggle.active .nav__toggle-icon--close {
+            opacity: 1;
+            transform: rotate(0deg);
         }
 
         .is-mobile .nav {
@@ -117,6 +157,7 @@ const { pathname } = Astro.url;
                 display: none;
             }
         }
+
         :global(.is-mobile) {
             .nav {
                 display: none;
@@ -124,14 +165,38 @@ const { pathname } = Astro.url;
 
             .mobile__menu {
                 background-color: var(--bg-color);
-                border-radius: 12px;
-                inset-block-start: 6rem;
+                box-shadow: -4px 0 16px rgba(0, 0, 0, 0.3);
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                height: 100vh;
+                inset-block-start: 0;
                 inset-inline-end: 0;
-                padding: 0.75rem;
-                position: absolute;
+                list-style: none;
+                margin: 0;
+                padding: 5rem 2rem 2rem;
+                position: fixed;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                width: 75vw;
+                z-index: 1000;
             }
 
-            .mobile__menu.active,
+            .mobile__menu.active {
+                transform: translateX(0);
+            }
+
+            .mobile__menu li {
+                margin: 0;
+            }
+
+            .mobile__menu .nav__link {
+                font-size: 1.5rem;
+                margin: 0;
+                display: block;
+                padding: 0.5rem 0;
+            }
+
             .nav__mobile {
                 display: block;
             }
@@ -145,9 +210,27 @@ const { pathname } = Astro.url;
 
     let toggleMobileMenu = () => {
         mobileMenu.classList.toggle("active");
+        navToggle.classList.toggle("active");
+
+        // Prevent body scrolling when menu is open
+        if (mobileMenu.classList.contains("active")) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
     };
 
     if (navToggle) {
         navToggle.addEventListener("click", toggleMobileMenu);
     }
+
+    // Close menu when clicking on a link
+    const mobileLinks = mobileMenu.querySelectorAll("a");
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            navToggle.classList.remove("active");
+            document.body.style.overflow = "";
+        });
+    });
 </script>
