@@ -127,11 +127,13 @@ const { pathname } = Astro.url;
         }
 
         .nav__toggle-icon--burger {
+            color: var(--white);
             opacity: 1;
             transform: rotate(0deg);
         }
 
         .nav__toggle-icon--close {
+            color: var(--white);
             opacity: 0;
             transform: rotate(-90deg);
         }
@@ -193,7 +195,7 @@ const { pathname } = Astro.url;
             .mobile__menu .nav__link {
                 font-size: 1.5rem;
                 margin: 0;
-                display: block;
+                display: inline-block;
                 padding: 0.5rem 0;
             }
 
