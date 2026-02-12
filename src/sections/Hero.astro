@@ -47,9 +47,10 @@ import overlay from "@/images/fuzz.avif";
         .inner-container {
             inset-block-start: 50%;
             inset-inline-start: 50%;
+            margin: 0 auto;
             position: absolute;
             translate: -50% -50%;
-            width: 100%;
+            width: 90%;
             z-index: 500;
         }
     }
@@ -178,6 +179,12 @@ import overlay from "@/images/fuzz.avif";
     }
 
     @media all and (min-width: 1440px) {
+        .section--hero {
+            .inner-container {
+                margin: 0;
+            }
+        }
+
         .hero__subTitle {
             font-size: 2rem;
             width: 60%;
@@ -207,6 +214,6 @@ import overlay from "@/images/fuzz.avif";
                 stagger: 0.1,
                 duration: 1,
             },
-            "-=1"
+            "-=1",
         );
 </script>
