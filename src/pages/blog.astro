@@ -10,7 +10,7 @@ const CONTENTFUL_ACCESS_TOKEN = import.meta.env.CONTENTFUL_ACCESS_TOKEN;
 
 // Fetch blog posts from Contentful
 const response = await fetch(
-    `https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`
+    `https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries?content_type=blogPost&access_token=${CONTENTFUL_ACCESS_TOKEN}`,
 );
 const data = await response.json();
 
@@ -49,7 +49,7 @@ posts = [];
     <section class="section section--blog">
         <div class="inner-container">
             <h1 class="section__title">
-                Blog <button id="subscribe">subscribe</button>
+                Blog
                 <!--  <Subscription /> -->
             </h1>
 
@@ -80,7 +80,7 @@ posts = [];
                                         )}
                                         <time class="blog-post__date">
                                             {new Date(
-                                                post.publishedDate
+                                                post.publishedDate,
                                             ).toLocaleDateString()}
                                         </time>
                                     </div>
@@ -88,11 +88,11 @@ posts = [];
                             </article>
                         ))
                     ) : (
-                        <h1 class="blog__no-posts">
+                        <h3 class="blog__no-posts">
                             Starting March 20
                             <sup style="text-transform: lowercase;">th</sup>,
                             2027
-                        </h1>
+                        </h3>
                     )
                 }
             </div>
