@@ -6,7 +6,7 @@
     font-size: 14px;
     font-weight: 400;
     margin-block-end: 2rem;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     position: relative;
 }
 
@@ -23,9 +23,9 @@
 
 .activity__content {
     align-items: center;
-    column-gap: 1.5rem;
+    column-gap: .375rem;
     display: grid;
-    grid-template-columns: 60px repeat(3, 1fr);
+    grid-template-columns: 60px repeat(2, 1fr);
     grid-template-rows: minmax(30px, 1fr);
     justify-content: start;
     row-gap: .75rem;
@@ -134,7 +134,9 @@
 }
 
 @media all and (min-width: 480px) {
-
+    .activity__content {
+        grid-template-columns: 60px repeat(3, 1fr);
+    }
 }
 
 

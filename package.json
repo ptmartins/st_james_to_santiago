@@ -15,6 +15,7 @@
     "@types/nodemailer": "^7.0.2",
     "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
+    "@upstash/redis": "^1.36.2",
     "astro": "^5.16.4",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",

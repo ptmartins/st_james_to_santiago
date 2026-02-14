@@ -26,10 +26,10 @@ h2 {
 .sessions__header {
     display: grid;
     font-weight: 700;
-    gap: 1.5rem;
-    grid-template-columns: 60px repeat(7, 1fr);
+    gap: .375rem;
+    grid-template-columns: 60px repeat(2, 1fr);
     grid-template-rows: minmax(30px, 1fr);
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .sessions__header > * {
@@ -49,31 +49,41 @@ h2 {
 }
 
 .header__distance {
+    display: none;
     grid-area: 1 / 4 / 2 / 5;
 }
 
 .header__avgSpeed {
+    display: none;
     grid-area: 1 / 5 / 2 / 6;
 }
 
 .header__altGain {
+    display: none;
     grid-area: 1 / 6 / 2 / 7;
 }
 
 .header__calories {
+        display: none;
     grid-area: 1 / 7 / 2 / 8;
-}
-
-.header__strava {
-    grid-area: 1 / 8 / 2 / 9;
 }
 
 @media all and (min-width: 480px) {
     .dashboardStats {
         flex-direction: row;
     }
+
+    .header__distance {
+        display: block;
+    }
+
 }
 
+@media all and (min-width: 480px) {
+    .sessions__header {
+        grid-template-columns: 60px repeat(3, 1fr);
+    }
+}
 
 @media all and (min-width: 768px) {
 

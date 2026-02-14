@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { addSubscriber } from '../../lib/subscribers';
 
 export const prerender = false; // Enable server-side rendering for this endpoint
 
@@ -39,8 +40,8 @@ export const POST: APIRoute = async ({ request }) => {
             );
         }
         
-        // Store subscription
-        await storeSubscription(email);
+        // Store subscription using Redis
+        await addSubscriber(email);
         
         // Send confirmation email
         await sendConfirmationEmail(email);
@@ -64,34 +65,7 @@ function isValidEmail(email: string): boolean {
     return emailRegex.test(email);
 }
 
-async function storeSubscription(email: string): Promise<void> {
-    console.log('Storing subscription for:', email);
-    // Simple file storage example (replace with database)
-    const fs = await import('fs/promises');
-    const path = './subscribers.json';
-    
-    try {
-        let subscribers: string[] = [];
-        try {
-            const data = await fs.readFile(path, 'utf-8');
-            subscribers = JSON.parse(data);
-        } catch {
-            // File doesn't exist, start with empty array
-        }
-        
-        if (!subscribers.includes(email)) {
-            subscribers.push(email);
-            await fs.writeFile(path, JSON.stringify(subscribers, null, 2));
-            console.log('Subscription stored successfully');
-        } else {
-            console.log('Email already subscribed');
-        }
-    } catch (error) {
-        console.error('Error storing subscription:', error);
-        throw error;
-    }
-}
-
 async function sendConfirmationEmail(email: string): Promise<void> {
     console.log(`Confirmation email would be sent to: ${email}`);
+    // TODO: Integrate email service (Resend, SendGrid, etc.)
 }

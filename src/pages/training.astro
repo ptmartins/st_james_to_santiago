@@ -3,25 +3,23 @@ import Layout from "../layouts/Layout.astro";
 import ActivityList from "../components/ActivityList.astro";
 import DashboardItem from "../components/DashboardItem.astro";
 import TrainingChart from "../components/TrainingChart.astro";
+import { getStravaActivities } from "../lib/strava";
 import "../styles/training.css";
 
-let activities = [];
+let activities: any[] = [];
 let totalSessions = 0;
 let totalDistance = 0;
 let totalDuration = 0;
-let totalDurationFormatted;
+let totalDurationFormatted = "00:00:00";
 let speed = 0;
 let avgSpeed = 0;
 
-const apiUrl = import.meta.env.PUBLIC_SITE_URL
-    ? `${import.meta.env.PUBLIC_SITE_URL}/api/strava`
-    : "http://localhost:4321/api/strava";
-
 try {
-    const res = await fetch(apiUrl);
-    activities = await res.json();
+    console.log("Fetching Strava activities...");
+    activities = await getStravaActivities();
+    console.log("Activities received:", activities.length);
 
-    activities.forEach((activity) => {
+    activities.forEach((activity: any) => {
         totalSessions++;
         totalDistance =
             totalDistance + parseFloat((activity.distance / 1000).toFixed(1));
@@ -31,12 +29,16 @@ try {
             .substr(11, 8);
         speed = speed + activity.average_speed;
     });
+
+    console.log("Total sessions:", totalSessions);
+    console.log("Total distance:", totalDistance);
 } catch (err) {
     console.error("Strava fetch error:", err);
     activities = [];
 }
 
-avgSpeed = parseFloat((speed / totalSessions).toFixed(1));
+avgSpeed =
+    totalSessions > 0 ? parseFloat((speed / totalSessions).toFixed(1)) : 0;
 ---
 
 <Layout title="Training">
@@ -61,11 +63,10 @@ avgSpeed = parseFloat((speed / totalSessions).toFixed(1));
                     <span class="header__type">Type</span>
                     <span class="header__date">Date/Time</span>
                     <span class="header__duration">Duration</span>
-                    <span class="header__distance">Distance (km)</span>
+                    <span class="header__distance">Dist. (km)</span>
                     <span class="header__avgSpeed">Avg. speed</span>
                     <span class="header__altGain">Alt. gain</span>
                     <span class="header__calories">Calories</span>
-                    <span class="header__strava">Strava</span>
                 </div>
                 {
                     activities.length > 0 ? (

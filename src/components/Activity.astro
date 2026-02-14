@@ -21,7 +21,9 @@ const avgSpeed = Number((data.average_speed * 3.6).toFixed(1));
 ---
 
 <div class="activity glass">
-    <div class="activity__content">
+<a href={`https://www.strava.com/activities/${data.id}`}
+   target="_blank"
+   class="activity__content">
         {
             /* use Lucide icons: bicycle for Ride, running (or activity) for Run */
         }
@@ -59,15 +61,7 @@ const avgSpeed = Number((data.average_speed * 3.6).toFixed(1));
         <div class="activity__data activity__data--calories">
             <span class="activity__value">{calories} cal</span>
         </div>
-
-        <a
-            href={`https://www.strava.com/activities/${data.id}`}
-            target="_blank"
-            class="activity__link"
-        >
-            See on Strava</a
-        >
-    </div>
+    </a>
 </div>
 
 <style>
